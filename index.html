@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Swap Litecoin — Convert LTC in One Transaction</title>
+<meta name="description" content="Swap Litecoin (LTC) to and from other coins without an account. See how an LTC swap works, where it happens, and what the network fee is." />
+<link rel="canonical" href="https://insert_url/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Swap Litecoin — Convert LTC in One Transaction" />
+<meta property="og:description" content="Swap Litecoin (LTC) to and from other coins without an account. How an LTC swap works, where it happens, and the network fee." />
+<meta property="og:url" content="https://insert_url/" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  /* Litecoin theme tokens — swapped per coin in the series */
+  --accent:#4a7fd6;
+  --accent-2:#345d9d;
+  --accent-soft:rgba(74,127,214,.14);
+  --silver:#c9cdd4;
+
+  --bg:#0a0c10;
+  --bg-2:#0e1117;
+  --panel:#141922;
+  --panel-2:#1a212c;
+  --line:rgba(255,255,255,.08);
+  --line-strong:rgba(255,255,255,.14);
+  --ink:#eef1f6;
+  --ink-2:#aeb6c2;
+  --ink-3:#7b8494;
+  --pos:#3fb98a;
+
+  --radius:18px;
+  --radius-sm:12px;
+  --maxw:1120px;
+  --font-display:"Space Grotesk",system-ui,sans-serif;
+  --font-body:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(60% 50% at 78% -5%,var(--accent-soft),transparent 70%),
+    radial-gradient(45% 40% at 8% 8%,rgba(52,93,157,.10),transparent 70%);
+}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--font-display);letter-spacing:-.02em;line-height:1.1;margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-display);font-size:12px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+
+/* ---------- Header ---------- */
+header.site{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+  background:rgba(10,12,16,.72);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:18px}
+.brand .mark{width:30px;height:30px;border-radius:50%}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{color:var(--ink-2);font-size:14.5px;font-weight:500}
+.nav-links a:hover{color:var(--ink)}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;justify-content:center;
+  font-family:var(--font-display);font-weight:600;font-size:15px;
+  padding:12px 20px;border-radius:12px;cursor:pointer;border:1px solid transparent;
+  transition:transform .12s ease,background .2s ease,border-color .2s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#fff;
+  box-shadow:0 8px 24px -8px var(--accent)}
+.btn-primary:hover{filter:brightness(1.06)}
+.btn-ghost{background:transparent;border-color:var(--line-strong);color:var(--ink)}
+.btn-ghost:hover{background:rgba(255,255,255,.04)}
+.nav .btn{padding:10px 18px}
+.nav-toggle{display:none}
+
+/* ---------- Hero ---------- */
+.hero{padding:104px 0 88px;min-height:calc(100vh - 68px);display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(44px,6vw,76px);font-weight:700}
+.hero h1 .grad{background:linear-gradient(120deg,#fff 20%,var(--silver) 60%,var(--accent) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lede{color:var(--ink-2);font-size:18px;max-width:36ch;margin:22px 0 30px}
+.hero .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+
+/* ---------- Swap widget ---------- */
+.widget{
+  background:linear-gradient(180deg,var(--panel),var(--bg-2));
+  border:1px solid var(--line-strong);border-radius:var(--radius);
+  padding:20px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8);position:relative;
+  transition:border-color .2s ease,box-shadow .3s ease;cursor:pointer;
+}
+.widget:hover{border-color:rgba(74,127,214,.6);
+  box-shadow:0 40px 80px -40px rgba(0,0,0,.8),0 0 0 1px rgba(74,127,214,.28),0 0 46px -12px var(--accent);}
+.widget .whead{font-family:var(--font-display);font-weight:600;font-size:13px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.leg{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.leg .side{display:flex;flex-direction:column;gap:3px}
+.leg .lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.leg .amt{font-family:var(--font-display);font-size:26px;font-weight:600}
+.token{display:inline-flex;align-items:center;gap:9px;background:var(--bg);
+  border:1px solid var(--line-strong);border-radius:999px;padding:7px 13px 7px 8px;
+  font-weight:600;font-size:15px;cursor:pointer}
+.token img,.token svg{width:24px;height:24px}
+.token .tok-ico{width:22px;height:22px;border-radius:50%}
+.token select{appearance:none;background:transparent;border:0;color:var(--ink);
+  font:inherit;font-weight:600;cursor:pointer;outline:none}
+.swap-mid{display:flex;justify-content:center;margin:-9px 0;position:relative;z-index:2}
+.swap-btn{width:40px;height:40px;border-radius:12px;background:var(--panel-2);
+  border:1px solid var(--line-strong);color:var(--accent);display:grid;place-items:center}
+.wrow{display:flex;justify-content:space-between;padding:11px 4px;font-size:13.5px;color:var(--ink-3);border-top:1px solid var(--line)}
+.wrow b{color:var(--ink-2);font-weight:600}
+.widget .btn-primary{width:100%;margin-top:14px}
+
+/* ---------- Section shell ---------- */
+main.wrap{padding-top:88px}
+.section{padding:44px 0;border-top:1px solid var(--line)}
+.section h2{font-size:clamp(26px,3.4vw,36px);font-weight:600;margin-bottom:6px}
+.section .sub{color:var(--ink-3);font-size:14px;margin-bottom:26px}
+.prose p{color:var(--ink-2);max-width:70ch;margin:0 0 16px}
+.prose strong{color:var(--ink);font-weight:600}
+.prose a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(74,127,214,.45)}
+.prose a:hover{border-bottom-color:var(--accent)}
+.prose code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em;
+  background:var(--panel-2);border:1px solid var(--line);padding:2px 7px;border-radius:7px;color:var(--silver)}
+
+/* video facade */
+.video-wrap{position:relative;margin-top:18px;border:1px solid var(--line-strong);border-radius:var(--radius);
+  overflow:hidden;aspect-ratio:16/9;background:#000;cursor:pointer}
+.video-wrap>img{width:100%;height:100%;object-fit:cover;opacity:.78;display:block;transition:opacity .2s ease}
+.video-wrap:hover>img{opacity:.62}
+.video-wrap .play{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.video-wrap .play i{width:72px;height:72px;border-radius:50%;background:rgba(74,127,214,.94);
+  display:grid;place-items:center;box-shadow:0 12px 34px -8px var(--accent);transition:transform .15s ease}
+.video-wrap:hover .play i{transform:scale(1.08)}
+.video-wrap .vlabel{position:absolute;left:16px;bottom:14px;font-family:var(--font-display);font-weight:600;
+  font-size:13px;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.7);pointer-events:none}
+.video-wrap iframe{width:100%;height:100%;border:0;display:block}
+.gp{display:inline-flex;align-items:center;gap:12px;margin-top:16px;padding:11px 18px;border-radius:12px;
+  border:1px solid var(--line-strong);background:var(--panel);color:var(--ink);
+  font-family:var(--font-display);font-weight:600;font-size:14.5px;transition:border-color .2s ease,background .2s ease}
+.gp:hover{border-color:var(--accent);background:rgba(255,255,255,.04)}
+.gp svg{flex:none}
+.gp small{display:block;font-family:var(--font-body);font-weight:400;font-size:11px;color:var(--ink-3)}
+.gp.reddit:hover{border-color:#ff4500}
+
+/* layout with sticky TOC */
+.doc{display:grid;grid-template-columns:230px 1fr;gap:56px;align-items:start}
+.toc{position:sticky;top:92px}
+.toc .eyebrow{margin-bottom:16px}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.toc a{display:block;padding:7px 12px;border-radius:9px;color:var(--ink-3);font-size:14px;border-left:2px solid transparent}
+.toc a:hover{color:var(--ink);background:rgba(255,255,255,.03)}
+.toc a.active{color:var(--ink);border-left-color:var(--accent);background:var(--accent-soft)}
+.block{scroll-margin-top:92px;padding:30px 0}
+.block:first-child{padding-top:0}
+.block h3{font-size:22px;font-weight:600;margin-bottom:12px}
+.block+.block{border-top:1px solid var(--line)}
+
+/* steps */
+.steps{display:grid;gap:14px;margin:20px 0 0;counter-reset:s}
+.step{display:flex;gap:16px;background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius-sm);padding:18px 20px}
+.step .n{counter-increment:s;flex:none;width:34px;height:34px;border-radius:10px;
+  display:grid;place-items:center;font-family:var(--font-display);font-weight:700;
+  background:var(--accent-soft);color:var(--accent);border:1px solid rgba(74,127,214,.3)}
+.step .n::before{content:counter(s)}
+.step h3{margin:0 0 4px;font-family:var(--font-display);font-size:16px;font-weight:600}
+.step p{margin:0;color:var(--ink-2);font-size:14.5px}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);padding:22px}
+.card .ico{width:38px;height:38px;border-radius:10px;background:var(--accent-soft);
+  display:grid;place-items:center;color:var(--accent);margin-bottom:14px}
+.card h3{font-family:var(--font-display);font-size:16.5px;font-weight:600;margin:0 0 7px}
+.card p{margin:0;color:var(--ink-2);font-size:14px}
+
+/* fee table */
+.tbl{width:100%;border-collapse:collapse;margin-top:20px;font-size:14.5px}
+.tbl th,.tbl td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line)}
+.tbl th{font-family:var(--font-display);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.tbl td{color:var(--ink-2)}
+.tbl td:first-child{color:var(--ink);font-weight:500}
+
+/* faq */
+.faq details{border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--panel);margin-bottom:12px;overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;padding:18px 20px;font-family:var(--font-display);
+  font-weight:600;font-size:16.5px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .chev{flex:none;transition:transform .2s ease;color:var(--accent)}
+.faq details[open] summary .chev{transform:rotate(45deg)}
+.faq .ans{padding:0 20px 20px;color:var(--ink-2);font-size:14.5px}
+.faq .ans p{margin:0}
+
+/* callout */
+.note{background:linear-gradient(180deg,var(--accent-soft),transparent);
+  border:1px solid rgba(74,127,214,.25);border-radius:var(--radius);padding:26px 28px;margin-top:14px}
+.note ul{margin:14px 0 0;padding-left:20px;color:var(--ink-2)}
+.note li{margin-bottom:8px}
+.note li strong{color:var(--ink)}
+
+/* footer */
+footer.site{border-top:1px solid var(--line);margin-top:20px;padding:40px 0;color:var(--ink-3);font-size:13.5px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.foot .fbrand{display:flex;align-items:center;gap:10px;color:var(--ink-2);font-family:var(--font-display);font-weight:600}
+.foot .disclaimer{color:var(--ink-3)}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:36px;padding:48px 0 20px}
+  .doc{grid-template-columns:1fr;gap:24px}
+  .toc{display:none}
+  .cards{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@media(max-width:560px){
+  .wrap{padding:0 18px}
+  .trust{flex-wrap:wrap;gap:14px}
+  .foot{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <img class="mark" src="assets/ltc.png" alt="Litecoin logo" width="30" height="30" />
+      <span>Swap Litecoin</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How to swap</a>
+      <a href="#where">Where to swap</a>
+      <a href="#pairs">Pairs</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-primary" href="/dashboard/" rel="noopener">Open app
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</header>
+
+<span id="top"></span>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Instant Litecoin swaps</span>
+      <h1>Swap <span class="grad">Litecoin</span></h1>
+      <p class="lede">Convert LTC to and from other coins straight from your own wallet — no account, no custody, one on-chain move.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/dashboard/" rel="noopener">Open the Swap Litecoin app
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#how">How it works</a>
+      </div>
+    </div>
+
+    <!-- PREVIEW WIDGET -->
+    <div class="widget" aria-label="Swap Litecoin">
+      <div class="whead">Swap route</div>
+
+      <div class="leg">
+        <div class="side">
+          <span class="lbl">You send</span>
+          <span class="amt" id="sendAmt">2.00</span>
+        </div>
+        <span class="token">
+          <img class="tok-ico" src="assets/ltc.png" alt="Litecoin" />
+          <span id="sendSym">LTC</span>
+        </span>
+      </div>
+
+      <div class="swap-mid">
+        <span class="swap-btn" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 4v13m0 0 3-3m-3 3-3-3M17 20V7m0 0 3 3m-3-3-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+
+      <div class="leg">
+        <div class="side">
+          <span class="lbl">You receive</span>
+          <span class="amt" id="recvAmt">0.0468</span>
+        </div>
+        <span class="token">
+          <img class="tok-ico" src="assets/eth.png" alt="Ethereum" />
+          <span>ETH</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="var(--ink-3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+
+      <div style="margin-top:14px">
+        <div class="wrow"><span>Rate</span><b id="rate">1 LTC ≈ 0.0234 ETH</b></div>
+        <div class="wrow"><span>Network fee</span><b>LTC on-chain only</b></div>
+        <div class="wrow"><span>Est. arrival</span><b>after confirmations</b></div>
+      </div>
+
+      <a class="btn btn-primary" href="/dashboard/" rel="noopener">Swap Litecoin
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+</div>
+
+<main class="wrap">
+  <div class="doc">
+
+    <!-- TOC -->
+    <aside class="toc">
+      <span class="eyebrow">On this page</span>
+      <nav><ol>
+        <li><a href="#how">How to swap Litecoin</a></li>
+        <li><a href="#video">Video guide</a></li>
+        <li><a href="#where">Where to swap Litecoin</a></li>
+        <li><a href="#pairs">Swap LTC to BTC, USDT, ETH</a></li>
+        <li><a href="#costs">Litecoin swap fees</a></li>
+        <li><a href="#fix">Problems &amp; fixes</a></li>
+        <li><a href="#community">Litecoin community</a></li>
+        <li><a href="#faq">Litecoin swap FAQ</a></li>
+        <li><a href="#notes">Before you swap</a></li>
+      </ol></nav>
+    </aside>
+
+    <div class="content">
+
+      <section class="block" id="how">
+        <h2>How to swap Litecoin</h2>
+        <div class="prose">
+          <p>To swap Litecoin, choose the coin you want, give a receiving address, send your LTC in one on-chain transaction, and the service releases the other asset once your Litecoin confirms — <strong>no account and no custody</strong>. Because Litecoin runs its own proof-of-work network, an LTC swap is a <strong>cross-chain exchange</strong> rather than a token trade on a single chain: your Litecoin leaves the Litecoin network, and the asset you asked for arrives on its own.</p>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="n"></span><div><h3>Pick the pair and amount</h3><p>Choose what you send (LTC) and what you receive. A live quote shows the rate and the estimated amount out before you commit.</p></div></div>
+          <div class="step"><span class="n"></span><div><h3>Give a receiving address</h3><p>Paste the wallet address for the asset you want back — on its correct network. This is where the swapped coin lands.</p></div></div>
+          <div class="step"><span class="n"></span><div><h3>Send the LTC</h3><p>Transfer Litecoin to the address shown, or confirm it in your connected wallet. One on-chain move, paid in low LTC network fees.</p></div></div>
+          <div class="step"><span class="n"></span><div><h3>Receive after confirmations</h3><p>Once the Litecoin transaction confirms, the service releases the target asset to your address. Timing depends on network congestion and the confirmations required.</p></div></div>
+        </div>
+        <p class="prose" style="margin-top:22px">Litecoin launched in 2011 as a Scrypt fork of Bitcoin and settles a block roughly every <strong>2.5 minutes</strong>, so the LTC leg confirms fast and cheaply. Which two networks the swap connects decides the route, the fee, and the wallet you receive into.</p>
+      </section>
+
+      <section class="block" id="video">
+        <h2>Watch how to swap crypto in a wallet</h2>
+        <p class="prose">Here is the official Trust Wallet walkthrough for swapping crypto inside a self-custodial wallet — the same app you can use to hold Litecoin.</p>
+        <div class="video-wrap" id="ytFacade" data-id="IiqvmfQ-IgU" role="button" tabindex="0" aria-label="Play video: How to swap crypto – Official Trust Wallet Guide">
+          <img src="https://i.ytimg.com/vi/IiqvmfQ-IgU/hqdefault.jpg" alt="How to swap crypto – Official Trust Wallet Guide" loading="lazy" width="1280" height="720" />
+          <span class="play"><i><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></i></span>
+          <span class="vlabel">Official Trust Wallet Guide · 2:34</span>
+        </div>
+        <a class="gp" href="https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp" target="_blank" rel="noopener" aria-label="Get Trust Wallet on Google Play">
+          <svg width="20" height="22" viewBox="0 0 24 24" fill="var(--accent)" aria-hidden="true"><path d="M3 2.5v19l16.5-9.5L3 2.5z"/></svg>
+          <span><small>The wallet shown in the guide</small>Trust Wallet on Google Play</span>
+        </a>
+      </section>
+
+      <section class="block" id="where">
+        <h2>Where to swap Litecoin</h2>
+        <p class="prose">There are three main ways to swap Litecoin, and they trade off custody, speed, and how much of the process you control.</p>
+        <div class="cards">
+          <div class="card">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16v10H4zM4 11h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Instant swap services</h3>
+            <p>Cross-chain exchangers quote a rate, take your LTC, and send the other asset to your address. No account, no custody held after the trade completes.</p>
+          </div>
+          <div class="card">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M5 8l7-5 7 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Centralized exchanges</h3>
+            <p>Deposit LTC, trade on an order book, and withdraw. Deepest liquidity for large trades, but the exchange custodies your funds and usually requires sign-up.</p>
+          </div>
+          <div class="card">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M16 13h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>In-wallet swap</h3>
+            <p>Wallets such as Exodus or Trust Wallet have a built-in swap: pick LTC and the coin you want, and the app routes the exchange without moving funds elsewhere. Convenient for a quick swap from a balance you already hold.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="pairs">
+        <h2>Swap Litecoin to Bitcoin, USDT, Ethereum and other coins</h2>
+        <p class="prose">Most Litecoin swaps head to one of a few destinations, and the mechanics change with the network the other asset lives on.</p>
+        <div class="cards">
+          <div class="card">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 6h6a3 3 0 0 1 0 6H8zm0 6h7a3 3 0 0 1 0 6H8zM9 6V3m4 0v3M9 21v-3m4 3v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Swap LTC to BTC</h3>
+            <p>Litecoin to Bitcoin is a like-for-like exchange between two proof-of-work chains — deep liquidity and a straightforward on-chain swap in either direction.</p>
+          </div>
+          <div class="card">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v10M9.5 9.3c0-1 1.1-1.6 2.5-1.6s2.5.6 2.5 1.7-1.1 1.5-2.5 1.8-2.5.8-2.5 1.9 1.1 1.6 2.5 1.6 2.5-.6 2.5-1.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Swap LTC to USDT or USDC</h3>
+            <p>Moving into a stablecoin converts your LTC into a dollar-denominated coin. USDT and USDC each run on several networks, so pick the network your wallet supports — the coins must arrive on the same chain you send them to.</p>
+          </div>
+          <div class="card">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Swap LTC to ETH, SOL or XRP</h3>
+            <p>Swapping into another major coin sends your Litecoin out and delivers ETH, SOL or XRP to an address on that coin's own network. Keep a little of that chain's coin for its own fees.</p>
+          </div>
+        </div>
+        <p class="prose" style="margin-top:20px">Whatever the pair, the rule holds: the receiving address must belong to the destination asset's network, and the amount you get is set by the live LTC swap rate when the swap executes.</p>
+      </section>
+
+      <section class="block" id="costs">
+        <h2>Litecoin swap fees and network cost</h2>
+        <div class="prose">
+          <p>A Litecoin swap has two possible cost layers, and it helps to keep them separate. The <strong>Litecoin network fee</strong> is what miners charge to include your LTC transaction — it is famously low, typically a fraction of a cent to a few cents, and paid in LTC. On top of that, a <strong>service or spread</strong> may be built into the quoted rate for the exchange itself.</p>
+        </div>
+        <table class="tbl">
+          <thead><tr><th>Cost</th><th>Paid in</th><th>Applies to</th></tr></thead>
+          <tbody>
+            <tr><td>LTC network fee</td><td>LTC</td><td>Every on-chain Litecoin send</td></tr>
+            <tr><td>Exchange spread</td><td>Built into rate</td><td>The swap service's margin</td></tr>
+            <tr><td>Receiving-chain fee</td><td>Target asset's gas</td><td>Only if you later move the received asset</td></tr>
+          </tbody>
+        </table>
+        <p class="prose" style="margin-top:20px">Because the LTC leg is cheap and fast, most of what you feel on a small swap is the rate itself. Always compare the <strong>quoted amount received</strong> across options rather than judging by a headline fee alone.</p>
+      </section>
+
+      <section class="block" id="fix">
+        <h2>Litecoin swap problems and fixes</h2>
+        <div class="prose">
+          <p><strong>The swap hasn't arrived.</strong> Litecoin confirmations take time under load, and most services wait for several before releasing the other asset. Check your LTC transaction in a <a href="https://blockchair.com/litecoin" target="_blank" rel="noopener">Litecoin block explorer</a>; if it is confirmed, the delay is on the release side and usually resolves shortly.</p>
+          <p><strong>Wrong network on the receiving side.</strong> The most common loss is sending to an address on the wrong chain. An LTC swap into, say, an ERC-20 asset must use an address on that asset's network. Confirm the network label before you submit.</p>
+          <p><strong>Rate moved before you sent.</strong> Quotes are time-bound. If LTC price shifts between the quote and your send, the amount received can differ. Re-quote if you waited, and mind any minimum or maximum the service enforces.</p>
+          <p><strong>Amount below the minimum.</strong> Very small swaps can be uneconomical once the fixed costs are covered. If a send is rejected or dust-sized on arrival, check the service's minimum before retrying.</p>
+        </div>
+        <h3 id="community" style="scroll-margin-top:92px">Litecoin community discussions</h3>
+        <p class="prose">For community help with Litecoin confirmations, wallet behavior and swap troubleshooting, visit the Litecoin subreddit:</p>
+        <a class="gp reddit" href="https://www.reddit.com/r/litecoin/" target="_blank" rel="noopener" aria-label="r/litecoin — the Litecoin community on Reddit">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF4500" aria-hidden="true"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+          <span><small>Litecoin community on Reddit</small>Visit r/litecoin</span>
+        </a>
+      </section>
+
+      <section class="block" id="faq">
+        <h2>Litecoin swap FAQ</h2>
+        <div class="faq">
+          <details open><summary>What is the best way to swap Litecoin?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary><div class="ans"><p>For most people a non-custodial instant swap is the quickest way: you get a live rate, send your LTC, and receive the other coin to your own address with no account. A centralized exchange suits large trades where you want an order book and deep liquidity.</p></div></details>
+          <details><summary>Do I need an account to swap LTC?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary><div class="ans"><p>Non-custodial swap services let you get a quote and exchange without signing up. Centralized exchanges generally require an account and custody your funds while you trade.</p></div></details>
+          <details><summary>How long does a Litecoin swap take?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary><div class="ans"><p>Litecoin blocks confirm about every 2.5 minutes, and services usually wait for a few confirmations before releasing the other asset. Total time depends on network congestion and the confirmations required.</p></div></details>
+          <details><summary>What fee do I pay to swap Litecoin?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary><div class="ans"><p>You pay the LTC on-chain network fee, which is typically very low, plus any spread the swap service builds into its rate. Compare the amount actually received rather than a headline fee.</p></div></details>
+          <details><summary>What's the minimum amount of LTC I can swap?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary><div class="ans"><p>Each service sets its own minimum, because very small swaps become uneconomical once fixed costs are covered. If a send is rejected or arrives dust-sized, check the service's minimum and adjust the amount before retrying.</p></div></details>
+          <details><summary>Can I swap LTC directly for a token on another chain?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary><div class="ans"><p>Yes — a cross-chain swap sends your LTC on the Litecoin network and delivers the target token to an address on its own network. Make sure the receiving address matches that token's chain.</p></div></details>
+          <details><summary>Can I swap Litecoin to Bitcoin?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary><div class="ans"><p>Yes. LTC to BTC is a like-for-like swap between two proof-of-work chains with deep liquidity, and it works the same way in reverse. You send Litecoin and receive Bitcoin at the quoted rate to your BTC address.</p></div></details>
+          <details><summary>When is my Litecoin swap rate fixed?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary><div class="ans"><p>It depends on the quote type. A fixed quote locks the rate for a short window, so you receive the shown amount if your LTC arrives in time; a floating quote settles at the market rate when your deposit confirms. Check which one the service shows before you send.</p></div></details>
+        </div>
+      </section>
+
+      <section class="block" id="notes">
+        <h2>Before you swap Litecoin</h2>
+        <div class="note">
+          <p class="prose" style="color:var(--ink)">A short checklist keeps a swap clean:</p>
+          <ul>
+            <li><strong>Match the networks.</strong> The receiving address must be on the target asset's own chain, not Litecoin's.</li>
+            <li><strong>Keep a little LTC for fees</strong> if you plan to swap again from the same wallet.</li>
+            <li><strong>Compare the amount received</strong>, not just the advertised fee, across a couple of routes.</li>
+            <li><strong>Verify the service and address</strong> every time, and test a small amount on any route you haven't used before.</li>
+            <li><strong>Pick the right stablecoin network</strong> — sending USDT or USDC to the wrong chain (ERC-20 vs TRC-20 and others) is a common, costly mistake.</li>
+          </ul>
+        </div>
+        <p class="prose" style="margin-top:22px;font-size:13.5px;color:var(--ink-3)">Litecoin network characteristics reflect the chain's documented design and on-chain behavior. Last reviewed 17 September 2026.</p>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap foot">
+    <span class="fbrand">
+      <img src="assets/ltc.png" alt="Litecoin logo" width="22" height="22" style="border-radius:50%" />
+      Swap Litecoin
+    </span>
+    <span class="disclaimer">© 2026 Swap Litecoin</span>
+  </div>
+</footer>
+
+<script>
+// Preview widget — illustrative only, no live pricing.
+// Whole widget is one click target -> the app
+(function(){
+  var w=document.querySelector('.widget');if(!w)return;
+  var go=function(){window.location.href='/dashboard/';};
+  w.setAttribute('role','link');
+  w.setAttribute('tabindex','0');
+  w.setAttribute('aria-label','Swap Litecoin');
+  w.addEventListener('click',go);
+  w.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
+})();
+
+// TOC scroll-spy
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var map={};links.forEach(function(l){var id=l.getAttribute('href').slice(1);map[id]=l;});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){
+      links.forEach(function(l){l.classList.remove('active');});
+      if(map[e.target.id])map[e.target.id].classList.add('active');}});
+  },{rootMargin:"-40% 0px -55% 0px"});
+  document.querySelectorAll('.block').forEach(function(b){io.observe(b);});
+})();
+
+// Lazy YouTube facade — loads the iframe only on interaction (protects Core Web Vitals)
+(function(){
+  var f=document.getElementById('ytFacade');if(!f)return;
+  function load(){var id=f.getAttribute('data-id');
+    f.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0" title="How to swap crypto – Official Trust Wallet Guide" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';}
+  f.addEventListener('click',load);
+  f.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();load();}});
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"What is the best way to swap Litecoin?","acceptedAnswer":{"@type":"Answer","text":"For most people a non-custodial instant swap is the quickest way: you get a live rate, send your LTC, and receive the other coin to your own address with no account. A centralized exchange suits large trades where you want an order book and deep liquidity."}},
+    {"@type":"Question","name":"Do I need an account to swap LTC?","acceptedAnswer":{"@type":"Answer","text":"Non-custodial swap services let you get a quote and exchange without signing up. Centralized exchanges generally require an account and custody your funds while you trade."}},
+    {"@type":"Question","name":"How long does a Litecoin swap take?","acceptedAnswer":{"@type":"Answer","text":"Litecoin blocks confirm about every 2.5 minutes, and services usually wait for a few confirmations before releasing the other asset. Total time depends on network congestion and the confirmations required."}},
+    {"@type":"Question","name":"What fee do I pay to swap Litecoin?","acceptedAnswer":{"@type":"Answer","text":"You pay the LTC on-chain network fee, which is typically very low, plus any spread the swap service builds into its rate. Compare the amount actually received rather than a headline fee."}},
+    {"@type":"Question","name":"What's the minimum amount of LTC I can swap?","acceptedAnswer":{"@type":"Answer","text":"Each service sets its own minimum, because very small swaps become uneconomical once fixed costs are covered. If a send is rejected or arrives dust-sized, check the service's minimum and adjust the amount before retrying."}},
+    {"@type":"Question","name":"Can I swap LTC directly for a token on another chain?","acceptedAnswer":{"@type":"Answer","text":"Yes. A cross-chain swap sends your LTC on the Litecoin network and delivers the target token to an address on its own network. Make sure the receiving address matches that token's chain."}},
+    {"@type":"Question","name":"Can I swap Litecoin to Bitcoin?","acceptedAnswer":{"@type":"Answer","text":"Yes. LTC to BTC is a like-for-like swap between two proof-of-work chains with deep liquidity, and it works the same way in reverse. You send Litecoin and receive Bitcoin at the quoted rate to your BTC address."}},
+    {"@type":"Question","name":"When is my Litecoin swap rate fixed?","acceptedAnswer":{"@type":"Answer","text":"It depends on the quote type. A fixed quote locks the rate for a short window, so you receive the shown amount if your LTC arrives in time; a floating quote settles at the market rate when your deposit confirms. Check which one the service shows before you send."}}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"VideoObject",
+  "name":"How to swap crypto – Official Trust Wallet Guide",
+  "description":"Official Trust Wallet walkthrough showing how to swap one cryptocurrency for another inside a self-custodial wallet.",
+  "thumbnailUrl":"https://i.ytimg.com/vi/IiqvmfQ-IgU/hqdefault.jpg",
+  "uploadDate":"2025-07-07",
+  "duration":"PT2M34S",
+  "embedUrl":"https://www.youtube-nocookie.com/embed/IiqvmfQ-IgU",
+  "publisher":{"@type":"Organization","name":"Trust Wallet"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "@id":"https://insert_url/",
+  "url":"https://insert_url/",
+  "name":"Swap Litecoin",
+  "mentions":{
+    "@type":"CollectionPage",
+    "@id":"https://www.reddit.com/r/litecoin/",
+    "url":"https://www.reddit.com/r/litecoin/",
+    "name":"r/litecoin — the Litecoin community on Reddit"
+  }
+}
+</script>
+</body>
+</html>
