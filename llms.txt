@@ -1,0 +1,3 @@
+# Litecoin Swap
+
+Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.
