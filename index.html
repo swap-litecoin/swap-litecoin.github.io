@@ -1,1107 +1,231 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Litecoin Swap — Trade LTC for USDC, BTC & Tokens</title>
-<meta name="description" content="Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.">
-<link rel="canonical" href="https://swap-litecoin.github.io/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Litecoin Swap">
-<meta property="og:description" content="Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.">
-<meta property="og:url" content="https://swap-litecoin.github.io/">
-<meta property="og:image" content="https://swap-litecoin.github.io/og.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Litecoin Swap">
-<meta name="twitter:description" content="Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.">
-<meta name="twitter:image" content="https://swap-litecoin.github.io/og.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Litecoin Swap — Trade LTC for USDC, BTC & Tokens</title>
+  <meta name="description" content="Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.">
+  <link rel="canonical" href="https://swap-litecoin.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Litecoin Swap">
+  <meta property="og:description" content="Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.">
+  <meta property="og:url" content="https://swap-litecoin.github.io/">
+  <meta property="og:image" content="https://swap-litecoin.github.io/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Litecoin Swap">
+  <meta name="twitter:description" content="Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.">
+  <meta name="twitter:image" content="https://swap-litecoin.github.io/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://swap-litecoin.github.io/#website", "url": "https://swap-litecoin.github.io/", "name": "Litecoin Swap — Trade LTC for USDC, BTC & Tokens"}, {"@type": "WebPage", "@id": "https://swap-litecoin.github.io/#webpage", "url": "https://swap-litecoin.github.io/", "name": "Litecoin Swap — Trade LTC for USDC, BTC & Tokens", "isPartOf": {"@id": "https://swap-litecoin.github.io/#website"}, "description": "Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.", "datePublished": "2026-10-10", "dateModified": "2026-10-10"}, {"@type": "SoftwareApplication", "name": "Litecoin Swap", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://swap-litecoin.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Swaps"}, {"@type": "ListItem", "position": 3, "name": "Litecoin Swap"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a Litecoin Swap?", "acceptedAnswer": {"@type": "Answer", "text": "A Litecoin Swap is an exchange of LTC for another asset — a stablecoin, another cryptocurrency, or BTC — settled on-chain or through a decentralized pool rather than inside a custodial exchange order book."}}, {"@type": "Question", "name": "How long does a Litecoin Swap take?", "acceptedAnswer": {"@type": "Answer", "text": "Most routes credit the new asset after one to three Litecoin confirmations, each about two and a half minutes apart, so a typical Litecoin Swap finishes within three to eight minutes."}}, {"@type": "Question", "name": "How much does a Litecoin Swap cost?", "acceptedAnswer": {"@type": "Answer", "text": "You pay Litecoin's small network fee, usually under a cent, plus the route's own fee, typically between 0.1% and 0.3% of the trade size. Both figures are shown in the quote before you sign."}}, {"@type": "Question", "name": "Can I swap LTC directly for USDC?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. An LTC-to-USDC route quotes the current rate and the minimum amount you will receive, then credits USDC to the same wallet once the transaction confirms — no separate account or exchange deposit required."}}, {"@type": "Question", "name": "Do I need an account to do a Litecoin Swap?", "acceptedAnswer": {"@type": "Answer", "text": "No. A self-custody Litecoin Swap only needs a connected wallet. There is no sign-up, no KYC form, and no balance held anywhere except on-chain."}}, {"@type": "Question", "name": "Is a Litecoin Swap safe?", "acceptedAnswer": {"@type": "Answer", "text": "A non-custodial Litecoin Swap is as safe as the wallet and route you use: your keys never leave your device, so the main risks are confirming the wrong amount or approving an unlimited allowance. Check both before you sign."}}, {"@type": "Question", "name": "What happens if my Litecoin Swap fails?", "acceptedAnswer": {"@type": "Answer", "text": "A failed transaction reverts on-chain and you keep your LTC; only the small network fee spent on the attempt is lost. Nothing is credited on the other side until the swap transaction confirms."}}]}]}</script>
-<style>
-:root{--bg:#0A0D13;--surface:#141B25;--text:#E9EFF6;--muted:#8794A6;--accent:#5B8CFF;--accent-ink:#05101F;--radius:14px;--display:"Space Grotesk";--body:"Inter"}
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-html {
-  min-width: 280px;
-  scroll-behavior: smooth;
-  scroll-padding-top: 2rem;
-  background: var(--bg);
-  -webkit-text-size-adjust: 100%;
-}
-body {
-  margin: 0;
-  color: var(--text);
-  background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 42rem), var(--bg);
-  font-family: var(--body);
-  font-size: 1rem;
-  line-height: 1.65;
-  overflow-wrap: anywhere;
-  -webkit-font-smoothing: antialiased;
-}
-::selection {
-  color: var(--accent-ink);
-  background: var(--accent);
-}
-a {
-  color: var(--accent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.22em;
-  transition: color 160ms ease, background 160ms ease, box-shadow 160ms ease;
-}
-a:hover {
-  color: color-mix(in srgb, var(--accent) 76%, var(--text));
-}
-a:focus-visible,
-input:focus-visible,
-summary:focus-visible,
-[tabindex]:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 5px;
-}
-img,
-svg {
-  max-width: 100%;
-  vertical-align: middle;
-}
-img {
-  height: auto;
-}
-input,
-output {
-  font-family: var(--body);
-}
-h1,
-h2,
-h3,
-h4 {
-  color: var(--text);
-  font-family: var(--display);
-  text-wrap: balance;
-}
-p,
-ul,
-ol,
-blockquote,
-figure {
-  margin: 0;
-}
-.c0e3983 {
-  width: min(100% - 4rem, 1120px);
-  margin-inline: auto;
-}
-.c3212d9 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  min-height: 92px;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-}
-.c9cf294 {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 1.2rem;
-  font-weight: 750;
-  letter-spacing: -0.045em;
-}
-.c1b4e65 {
-  display: grid;
-  width: 36px;
-  height: 36px;
-  place-items: center;
-  border: 1px solid color-mix(in srgb, var(--accent) 23%, transparent);
-  border-radius: calc(var(--radius) * 0.55);
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
-  font-size: 1.4rem;
-  line-height: 1;
-}
-.c5abe39 {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.7rem;
-  min-height: 42px;
-  padding: 0.55rem 1.1rem;
-  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
-  border-radius: calc(var(--radius) * 0.65);
-  color: var(--text);
-  background: color-mix(in srgb, var(--surface) 80%, transparent);
-  font-size: 0.85rem;
-  font-weight: 650;
-  text-decoration: none;
-}
-.c5abe39:hover {
-  color: var(--accent);
-  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
-  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
-}
-.cbb1366 {
-  padding-block: 1.4rem 0.5rem;
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-.c83e7fc {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.45rem 0.7rem;
-  margin: 0;
-  padding: 0;
-  color: var(--muted);
-  list-style: none;
-}
-.c83e7fc ol,
-.c83e7fc ul {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.45rem 0.7rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.c83e7fc li {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-.c83e7fc li + li::before {
-  content: "/";
-  color: color-mix(in srgb, var(--muted) 60%, transparent);
-}
-.c83e7fc a {
-  color: var(--muted);
-  text-decoration: none;
-}
-.c83e7fc a:hover {
-  color: var(--accent);
-  text-decoration: underline;
-}
-.c83e7fc [aria-current="page"] {
-  color: var(--text);
-}
-.c84f8d5 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: clamp(1.5rem, 3.5vw, 2.75rem);
-  text-align: center;
-}
-.c7a7727 {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin-bottom: 1.25rem;
-  padding: 0.35rem 0.8rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-  border-radius: calc(var(--radius) * 2);
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-.c7a7727::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 10%, transparent);
-}
-.c84f8d5 h1 {
-  max-width: 960px;
-  margin: 0;
-  font-size: clamp(2.3rem, 5vw, 4.2rem);
-  font-weight: 650;
-  line-height: 1.06;
-  letter-spacing: -0.06em;
-}
-.c84f8d5 h1 em,
-.c84f8d5 h1 strong,
-.c84f8d5 h1 span {
-  color: var(--accent);
-}
-.c84f8d5 h1 em {
-  font-style: normal;
-}
-.ceb0a68 {
-  max-width: 720px;
-  margin: 1.1rem auto 0;
-  color: var(--muted);
-  font-size: clamp(1rem, 1.65vw, 1.15rem);
-  line-height: 1.85;
-  text-wrap: pretty;
-}
-.c37582d {
-  position: relative;
-  isolation: isolate;
-  width: 100%;
-  margin-top: clamp(1.25rem, 2.5vw, 2rem);
-  padding: clamp(1.2rem, 3.5vw, 2.6rem);
-  border: 1px solid color-mix(in srgb, var(--accent) 19%, var(--surface));
-  border-radius: var(--radius);
-  background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 5%, var(--surface)), var(--surface) 48%);
-  box-shadow: 0 24px 65px -24px color-mix(in srgb, var(--text) 21%, transparent), 0 4px 14px -7px color-mix(in srgb, var(--accent) 16%, transparent);
-  text-align: left;
-}
-.c37582d::before {
-  position: absolute;
-  inset: -1px 12% auto;
-  height: 2px;
-  content: "";
-  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 0%, transparent), color-mix(in srgb, var(--accent) 65%, transparent), color-mix(in srgb, var(--accent) 0%, transparent));
-}
-.c938831 {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.6rem 1rem;
-  margin-bottom: 1rem;
-}
-.c938831 h2 {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 650;
-  letter-spacing: -0.035em;
-}
-.c938831 p {
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-.c518428 {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: stretch;
-  gap: 1rem;
-}
-.c8e2496 {
-  min-width: 0;
-  padding: 1.4rem 1.5rem 1.1rem;
-  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-  border-radius: calc(var(--radius) * 0.7);
-  background: color-mix(in srgb, var(--bg) 65%, var(--surface));
-  transition: border-color 160ms ease, box-shadow 160ms ease;
-}
-.c8e2496:focus-within {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 9%, transparent);
-}
-.cad023c {
-  border-color: color-mix(in srgb, var(--accent) 18%, transparent);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, var(--surface)), color-mix(in srgb, var(--accent) 3%, var(--surface)));
-}
-.c0aac97 {
-  display: block;
-  margin-bottom: 0.65rem;
-  color: var(--muted);
-  font-size: 0.82rem;
-  font-weight: 550;
-}
-#amount {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  color: var(--text);
-  background: color-mix(in srgb, var(--surface) 0%, transparent);
-  font-family: var(--body);
-  font-size: clamp(1.7rem, 3vw, 2.65rem);
-  font-weight: 550;
-  font-variant-numeric: tabular-nums;
-  line-height: 1.3;
-  letter-spacing: -0.045em;
-  appearance: textfield;
-  -moz-appearance: textfield;
-}
-#amount::-webkit-inner-spin-button,
-#amount::-webkit-outer-spin-button {
-  margin: 0;
-  -webkit-appearance: none;
-}
-#amount::placeholder {
-  color: var(--muted);
-  opacity: 0.65;
-}
-#amount:focus-visible {
-  outline-offset: 3px;
-  outline-width: 2px;
-}
-#amount[aria-invalid="true"] {
-  text-decoration: underline wavy;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-}
-#received {
-  display: block;
-  min-height: 1.3em;
-  color: var(--text);
-  font-size: clamp(1.7rem, 3vw, 2.65rem);
-  font-weight: 550;
-  font-variant-numeric: tabular-nums;
-  line-height: 1.3;
-  letter-spacing: -0.045em;
-  overflow-wrap: anywhere;
-}
-.c08c3b6 {
-  display: block;
-  margin-top: 0.6rem;
-  color: var(--muted);
-  font-size: 0.73rem;
-  line-height: 1.5;
-}
-.c20e88f {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding-inline: 0.15rem;
-}
-.ce5c743 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  width: 48px;
-  min-height: 48px;
-  padding: 0.4rem;
-  border: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-  border-radius: calc(var(--radius) * 0.55);
-  background: var(--surface);
-  box-shadow: 0 4px 10px color-mix(in srgb, var(--text) 4%, transparent);
-  font-size: 0.65rem;
-  line-height: 1.2;
-  text-align: center;
-}
-.ce5c743 img,
-.ce5c743 svg {
-  display: block;
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-.cb28bc6 {
-  color: var(--accent);
-  font-size: 1.3rem;
-}
-.cfddebc {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.55fr);
-  align-items: center;
-  gap: 1.5rem 2.5rem;
-  margin-top: 1.4rem;
-}
-.cf5b80a {
-  display: grid;
-  gap: 0.45rem;
-  margin: 0;
-  font-size: 0.8rem;
-}
-.cf5b80a > div {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-}
-.cf5b80a dt {
-  color: var(--muted);
-}
-.cf5b80a dd {
-  margin: 0;
-  color: var(--text);
-  font-weight: 550;
-  font-variant-numeric: tabular-nums;
-  text-align: right;
-}
-.c0582c8 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  min-height: 56px;
-  padding: 0.9rem 1.3rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 85%, var(--text));
-  border-radius: calc(var(--radius) * 0.65);
-  color: var(--accent-ink);
-  background: linear-gradient(120deg, var(--accent), color-mix(in srgb, var(--accent) 85%, var(--text)));
-  box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--accent) 45%, transparent);
-  font-size: 0.9rem;
-  font-weight: 650;
-  text-decoration: none;
-  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-}
-.c0582c8:hover {
-  transform: translateY(-2px);
-  color: var(--accent-ink);
-  background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 94%, var(--text)), color-mix(in srgb, var(--accent) 78%, var(--text)));
-  box-shadow: 0 12px 28px -9px color-mix(in srgb, var(--accent) 50%, transparent);
-}
-.c0582c8:active {
-  transform: translateY(0);
-}
-.c0582c8 span:last-child {
-  font-size: 1.3rem;
-  line-height: 1;
-}
-.c59bcb6 {
-  min-height: 1.5em;
-  margin-top: 0.8rem;
-  color: var(--muted);
-  font-size: 0.75rem;
-}
-.c59bcb6[data-invalid="true"] {
-  color: var(--text);
-  font-weight: 600;
-}
-.c6ce1a4 {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  margin-block: 1.6rem 4.5rem;
-  padding: 1rem 0;
-  border-block: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
-  list-style: none;
-}
-.c6ce1a4 li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.6rem 0.75rem;
-  color: var(--muted);
-  font-size: 0.8rem;
-  text-align: center;
-}
-.c6ce1a4 li + li {
-  border-left: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-}
-.c6ce1a4 li::before {
-  content: "✓";
-  color: var(--accent);
-  font-size: 0.85rem;
-  font-weight: 650;
-}
-.c24a0b6 {
-  margin-bottom: 4rem;
-  padding: clamp(1.25rem, 3.5vw, 2.75rem);
-  border: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: 0 12px 35px -22px color-mix(in srgb, var(--text) 18%, transparent);
-}
-.c07fffc {
-  margin: 0 0 1.6rem;
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.045em;
-}
-.c7df88d {
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-}
-.c1879e2 {
-  width: 100%;
-  border-collapse: collapse;
-  color: var(--text);
-  font-size: 0.92rem;
-  line-height: 1.65;
-  text-align: left;
-}
-.c1879e2 caption {
-  margin-bottom: 1rem;
-  color: var(--muted);
-  font-size: 0.85rem;
-  text-align: left;
-}
-.c1879e2 th,
-.c1879e2 td {
-  padding: 1.05rem 1.2rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
-  vertical-align: top;
-}
-.c1879e2 th {
-  width: 31%;
-  color: var(--muted);
-  font-weight: 500;
-}
-.c1879e2 td {
-  font-weight: 550;
-}
-.c1879e2 tr:nth-child(odd) {
-  background: color-mix(in srgb, var(--accent) 3%, var(--surface));
-}
-.c1879e2 tr:last-child > * {
-  border-bottom: 0;
-}
-.c1879e2 thead th {
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
-  font-weight: 650;
-}
-.cdf848b {
-  width: min(100%, 860px);
-  margin-inline: auto;
-}
-.c1ae53e {
-  margin-block: 0 3.6rem;
-  padding-bottom: 3.2rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-  scroll-margin-top: 2rem;
-}
-.c7fdebc {
-  margin: 0 0 1.25rem;
-  color: var(--text);
-  font-family: var(--display);
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.045em;
-}
-.cdc2c54 {
-  color: var(--muted);
-  font-family: var(--body);
-  font-size: 1rem;
-  line-height: 1.85;
-}
-.cdc2c54 > * + * {
-  margin-top: 1.25rem;
-}
-.cdc2c54 h3,
-.cdc2c54 h4 {
-  margin-block: 2rem 0.75rem;
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 1.3rem;
-  font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: -0.025em;
-}
-.cdc2c54 h4 {
-  font-size: 1.1rem;
-}
-.cdc2c54 strong,
-.cb900ff strong {
-  color: var(--text);
-  font-weight: 650;
-}
-.cdc2c54 ul,
-.cdc2c54 ol,
-.cb900ff ul,
-.cb900ff ol {
-  padding-left: 1.4rem;
-}
-.cdc2c54 li,
-.cb900ff li {
-  padding-left: 0.3rem;
-}
-.cdc2c54 li + li,
-.cb900ff li + li {
-  margin-top: 0.65rem;
-}
-.cdc2c54 li::marker,
-.cb900ff li::marker {
-  color: var(--accent);
-}
-.cdc2c54 li > ul,
-.cdc2c54 li > ol {
-  margin-top: 0.65rem;
-}
-.cdc2c54 blockquote {
-  padding: 1.25rem 1.5rem;
-  border-left: 3px solid var(--accent);
-  border-radius: 0 calc(var(--radius) * 0.45) calc(var(--radius) * 0.45) 0;
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
-}
-.cdc2c54 blockquote p + p {
-  margin-top: 0.8rem;
-}
-.cdc2c54 table {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
-  border-collapse: collapse;
-  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
-  border-radius: calc(var(--radius) * 0.6);
-  background: var(--surface);
-  font-size: 0.88rem;
-  line-height: 1.6;
-  text-align: left;
-  overscroll-behavior-inline: contain;
-}
-.cdc2c54 table th,
-.cdc2c54 table td {
-  min-width: 8rem;
-  padding: 0.95rem 1.15rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-  vertical-align: top;
-}
-.cdc2c54 table th {
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
-  font-weight: 600;
-}
-.cdc2c54 table tbody tr:nth-child(even) {
-  background: color-mix(in srgb, var(--bg) 65%, var(--surface));
-}
-.cdc2c54 table tr:last-child td {
-  border-bottom: 0;
-}
-.cdc2c54 table caption {
-  padding: 0.85rem 1.15rem;
-  color: var(--muted);
-  font-size: 0.8rem;
-  text-align: left;
-}
-.cdc2c54 code,
-.cdc2c54 pre {
-  border-radius: calc(var(--radius) * 0.3);
-  color: var(--text);
-  background: color-mix(in srgb, var(--text) 5%, var(--surface));
-  font-family: var(--body);
-  font-size: 0.9em;
-}
-.cdc2c54 code {
-  padding: 0.15em 0.4em;
-}
-.cdc2c54 pre {
-  overflow-x: auto;
-  padding: 1.2rem;
-}
-.cdc2c54 pre code {
-  padding: 0;
-  background: color-mix(in srgb, var(--surface) 0%, transparent);
-}
-.cdc2c54 figure img {
-  display: block;
-  border-radius: calc(var(--radius) * 0.7);
-}
-.cdc2c54 figcaption {
-  margin-top: 0.7rem;
-  color: var(--muted);
-  font-size: 0.8rem;
-}
-.c867a7d {
-  margin-block: 1rem;
-  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-  border-radius: calc(var(--radius) * 0.7);
-  background: var(--surface);
-  transition: border-color 180ms ease, box-shadow 180ms ease;
-}
-.c867a7d:hover {
-  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
-}
-.c867a7d[open] {
-  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
-  box-shadow: 0 8px 25px -14px color-mix(in srgb, var(--text) 15%, transparent);
-}
-.c133a22 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding: 1.3rem 1.5rem;
-  border-radius: calc(var(--radius) * 0.7);
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 1.04rem;
-  font-weight: 550;
-  line-height: 1.5;
-  list-style: none;
-  cursor: pointer;
-}
-.c133a22::-webkit-details-marker {
-  display: none;
-}
-.c133a22::after {
-  display: grid;
-  flex: 0 0 27px;
-  width: 27px;
-  height: 27px;
-  place-items: center;
-  content: "+";
-  border-radius: 50%;
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
-  font-family: var(--body);
-  font-size: 1.2rem;
-  font-weight: 400;
-  line-height: 1;
-}
-.c867a7d[open] > .c133a22::after {
-  content: "−";
-}
-.cb900ff {
-  padding: 0 1.5rem 1.5rem;
-  color: var(--muted);
-  font-family: var(--body);
-  font-size: 0.95rem;
-  line-height: 1.85;
-}
-.cb900ff > * + * {
-  margin-top: 1rem;
-}
-.c8c6551 {
-  margin-top: 4rem;
-  padding: 2.2rem 0 2.5rem;
-  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-}
-.c8c6551 .c07fffc {
-  margin-bottom: 1.2rem;
-  font-size: 1.35rem;
-}
-.c8b65ea {
-  display: grid;
-  gap: 0.7rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.c88c9a1 {
-  min-width: 0;
-  padding: 0.8rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
-  border-radius: calc(var(--radius) * 0.45);
-  color: var(--muted);
-  background: color-mix(in srgb, var(--surface) 70%, var(--bg));
-  font-size: 0.82rem;
-  line-height: 1.7;
-  overflow-wrap: anywhere;
-}
-.c88c9a1 a,
-a.c88c9a1 {
-  color: var(--text);
-  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
-}
-.c88c9a1 a:hover,
-a.c88c9a1:hover {
-  color: var(--accent);
-  text-decoration-color: var(--accent);
-}
-.c886ce4 {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem 2rem;
-  margin-top: 1rem;
-  padding-block: 1.7rem 2.2rem;
-  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-.c4ce46e {
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-}
-.c85582a span {
-  color: var(--text);
-}
-@media (min-width: 1280px) {
-  .c84f8d5 {
-    padding-top: 5.2rem;
-  }
-  .c37582d {
-    margin-top: 3.4rem;
-  }
-  .c8e2496 {
-    padding-block: 1.6rem 1.3rem;
-  }
-}
-@media (max-width: 900px) {
-  .c0e3983 {
-    width: min(100% - 3rem, 1120px);
-  }
-  .c518428 {
-    gap: 0.65rem;
-  }
-  .c8e2496 {
-    padding: 1.1rem;
-  }
-  .c20e88f {
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-  .ce5c743 {
-    width: 38px;
-    min-height: 38px;
-  }
-  .ce5c743 img,
-  .ce5c743 svg {
-    width: 25px;
-    height: 25px;
-  }
-  .cb28bc6 {
-    line-height: 1;
-  }
-  .c6ce1a4 {
-    margin-bottom: 3rem;
-  }
-}
-@media (max-width: 640px) {
-  html {
-    scroll-padding-top: 1rem;
-  }
-  .c0e3983 {
-    width: calc(100% - 2rem);
-  }
-  .c3212d9 {
-    min-height: 76px;
-    gap: 0.75rem;
-  }
-  .c9cf294 {
-    gap: 0.5rem;
-    font-size: 1.08rem;
-  }
-  .c5abe39 {
-    min-height: 40px;
-    padding: 0.45rem 0.8rem;
-    font-size: 0.78rem;
-  }
-  .cbb1366 {
-    padding-top: 1rem;
-  }
-  .c84f8d5 {
-    padding-top: 2.4rem;
-  }
-  .c84f8d5 h1 {
-    font-size: clamp(2.25rem, 10vw, 3.6rem);
-    letter-spacing: -0.05em;
-  }
-  .ceb0a68 {
-    margin-top: 1.1rem;
-    line-height: 1.75;
-  }
-  .c37582d {
-    padding: 1.1rem;
-  }
-  .c938831 {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.3rem;
-    margin-bottom: 1.1rem;
-  }
-  .c518428 {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.7rem;
-  }
-  .c8e2496 {
-    padding: 1.2rem;
-  }
-  #amount,
-  #received {
-    font-size: clamp(1.8rem, 8vw, 2.6rem);
-  }
-  .c20e88f {
-    flex-direction: row;
-    gap: 0.8rem;
-    padding-block: 0.1rem;
-  }
-  .ce5c743 {
-    width: 40px;
-    min-height: 40px;
-  }
-  .cfddebc {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.2rem;
-    margin-top: 1.2rem;
-  }
-  .cf5b80a {
-    font-size: 0.78rem;
-  }
-  .c0582c8 {
-    min-height: 54px;
-  }
-  .c6ce1a4 {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
-    margin-block: 1.4rem 2.6rem;
-    padding-block: 0.5rem;
-  }
-  .c6ce1a4 li {
-    justify-content: flex-start;
-    padding: 0.7rem 1rem;
-  }
-  .c6ce1a4 li + li {
-    border-top: 1px solid color-mix(in srgb, var(--text) 6%, transparent);
-    border-left: 0;
-  }
-  .c24a0b6 {
-    margin-bottom: 2.8rem;
-    padding: 1.2rem;
-  }
-  .c07fffc {
-    margin-bottom: 1.2rem;
-  }
-  .c1879e2 {
-    font-size: 0.82rem;
-  }
-  .c1879e2 th,
-  .c1879e2 td {
-    padding: 0.8rem 0.6rem;
-  }
-  .c1879e2 th {
-    width: 38%;
-  }
-  .c1ae53e {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2.3rem;
-  }
-  .cdc2c54 {
-    font-size: 0.95rem;
-    line-height: 1.8;
-  }
-  .cdc2c54 h3 {
-    font-size: 1.2rem;
-  }
-  .cdc2c54 blockquote {
-    padding: 1rem 1.15rem;
-  }
-  .c133a22 {
-    gap: 0.9rem;
-    padding: 1.1rem;
-    font-size: 0.98rem;
-  }
-  .cb900ff {
-    padding: 0 1.1rem 1.2rem;
-    font-size: 0.9rem;
-  }
-  .c8c6551 {
-    margin-top: 2.6rem;
-    padding-block: 1.8rem;
-  }
-  .c886ce4 {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.45rem;
-    padding-block: 1.4rem 1.8rem;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    transition: none;
-    animation: none;
-  }
-  .c0582c8:hover {
-    transform: none;
-  }
-}
-@media print {
-  body {
-    background: var(--bg);
-  }
-  .c0e3983,
-  .cdf848b {
-    width: 100%;
-  }
-  .c5abe39,
-  .c0582c8 {
-    display: none;
-  }
-  .c84f8d5 {
-    padding-top: 1.5rem;
-  }
-  .c84f8d5 h1 {
-    font-size: 2.6rem;
-  }
-  .c37582d,
-  .c24a0b6,
-  .c867a7d {
-    box-shadow: none;
-    break-inside: avoid;
-  }
-  .cdc2c54 h3,
-  .c7fdebc {
-    break-after: avoid;
-  }
-  .cdc2c54 table {
-    display: table;
-    overflow: visible;
-  }
-}
-</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://swap-litecoin.github.io/#website", "url": "https://swap-litecoin.github.io/", "name": "Litecoin Swap — Trade LTC for USDC, BTC & Tokens"}, {"@type": "WebPage", "@id": "https://swap-litecoin.github.io/#webpage", "url": "https://swap-litecoin.github.io/", "name": "Litecoin Swap — Trade LTC for USDC, BTC & Tokens", "isPartOf": {"@id": "https://swap-litecoin.github.io/#website"}, "description": "Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.", "datePublished": "2026-10-11", "dateModified": "2026-10-11"}, {"@type": "SoftwareApplication", "name": "Litecoin Swap", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://swap-litecoin.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Swaps"}, {"@type": "ListItem", "position": 3, "name": "Litecoin Swap"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a Litecoin Swap?", "acceptedAnswer": {"@type": "Answer", "text": "A Litecoin Swap is an exchange of LTC for another asset — a stablecoin, another cryptocurrency, or BTC — settled on-chain or through a decentralized pool rather than inside a custodial exchange order book."}}, {"@type": "Question", "name": "How long does a Litecoin Swap take?", "acceptedAnswer": {"@type": "Answer", "text": "Most routes credit the new asset after one to three Litecoin confirmations, each about two and a half minutes apart, so a typical Litecoin Swap finishes within three to eight minutes."}}, {"@type": "Question", "name": "How much does a Litecoin Swap cost?", "acceptedAnswer": {"@type": "Answer", "text": "You pay Litecoin's small network fee, usually under a cent, plus the route's own fee, typically between 0.1% and 0.3% of the trade size. Both figures are shown in the quote before you sign."}}, {"@type": "Question", "name": "Can I swap LTC directly for USDC?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. An LTC-to-USDC route quotes the current rate and the minimum amount you will receive, then credits USDC to the same wallet once the transaction confirms — no separate account or exchange deposit required."}}, {"@type": "Question", "name": "Do I need an account to do a Litecoin Swap?", "acceptedAnswer": {"@type": "Answer", "text": "No. A self-custody Litecoin Swap only needs a connected wallet. There is no sign-up, no KYC form, and no balance held anywhere except on-chain."}}, {"@type": "Question", "name": "Is a Litecoin Swap safe?", "acceptedAnswer": {"@type": "Answer", "text": "A non-custodial Litecoin Swap is as safe as the wallet and route you use: your keys never leave your device, so the main risks are confirming the wrong amount or approving an unlimited allowance. Check both before you sign."}}, {"@type": "Question", "name": "What happens if my Litecoin Swap fails?", "acceptedAnswer": {"@type": "Answer", "text": "A failed transaction reverts on-chain and you keep your LTC; only the small network fee spent on the attempt is lost. Nothing is credited on the other side until the swap transaction confirms."}}]}]}</script>
+  <style>
+    :root{--bg:#0A0D13;--surface:#141B25;--text:#E9EFF6;--muted:#8794A6;--accent:#5B8CFF;--accent-ink:#05101F;--radius:14px;--display:"Space Grotesk";--body:"Inter"}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 400 1rem/1.7 var(--body); -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-underline-offset: .22em; }
+    a:hover { text-decoration-thickness: .12em; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+    ::selection { background: var(--accent); color: var(--accent-ink); }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--display); line-height: 1.15; text-wrap: balance; }
+    p, h1, h2, h3 { margin-top: 0; }
+    img, svg { max-width: 100%; vertical-align: middle; }
+    .c0e3983 { width: min(1180px, calc(100% - 3rem)); margin-inline: auto; }
+    .cd3770a { position: absolute; z-index: 5; top: .5rem; left: 1rem; padding: .7rem 1rem; background: var(--surface); transform: translateY(-180%); border-radius: var(--radius); }
+    .cd3770a:focus { transform: translateY(0); }
+    .c19d383 { border-bottom: 1px solid color-mix(in srgb,var(--text) 10%,transparent); }
+    .c227944 { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .c9484cb { display: inline-flex; align-items: center; gap: .7rem; color: var(--text); font: 650 1.12rem/1.2 var(--display); text-decoration: none; }
+    .cf04331 { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: calc(var(--radius) * .6); background: var(--accent); color: var(--accent-ink); }
+    .c947c36 { width: 1.2rem; height: 1.2rem; fill: none; stroke: var(--accent-ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+    .cb471e5 { display: flex; align-items: center; gap: 1.8rem; }
+    .cb471e5 > a { font-size: .88rem; font-weight: 600; text-decoration: none; }
+    .cb471e5 > a:not(.c321902) { color: var(--muted); }
+    .c321902 { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-height: 52px; padding: .85rem 1.4rem; border: 1px solid color-mix(in srgb,var(--accent-ink) 12%,transparent); border-radius: var(--radius); background: linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 88%,var(--text))); color: var(--accent-ink); font: 650 .95rem/1.3 var(--body); text-decoration: none; box-shadow: 0 6px 18px color-mix(in srgb,var(--accent) 17%,transparent); transition: transform .18s ease, box-shadow .18s ease; }
+    .c321902:hover { transform: translateY(-2px); box-shadow: 0 9px 24px color-mix(in srgb,var(--accent) 25%,transparent); }
+    .c227944 .c321902 { min-height: 42px; padding: .65rem 1rem; }
+    .c728825 { padding-block: 1rem 0; color: var(--muted); font-size: .8rem; overflow-wrap: anywhere; }
+    .c83e7fc { color: var(--muted); }
+    .c83e7fc a, a.c83e7fc { color: var(--muted); text-decoration: none; }
+    .c83e7fc a:hover, a.c83e7fc:hover { color: var(--accent); text-decoration: underline; }
+    .c83e7fc ol, .c83e7fc ul { display: flex; flex-wrap: wrap; gap: .5rem 1rem; padding: 0; margin: 0; list-style: none; }
+    .c84f8d5 { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: clamp(2rem,5vw,4.5rem); align-items: start; padding-block: 1.5rem 3rem; }
+    .c7a7727 { display: inline-flex; align-items: center; gap: .55rem; margin-bottom: 1.3rem; color: var(--accent); font-size: .86rem; font-weight: 600; }
+    .c7a7727::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb,var(--accent) 9%,transparent); }
+    h1 { margin-bottom: 1.4rem; font-size: clamp(2.5rem,4.7vw,4.35rem); font-weight: 600; letter-spacing: -.055em; overflow-wrap: anywhere; }
+    h1 em { color: var(--accent); font-style: normal; }
+    .cb3b29b { max-width: 48ch; margin-bottom: 2rem; color: var(--muted); font-size: 1.08rem; line-height: 1.8; }
+    .caf849c { position: relative; min-width: 0; padding: clamp(1.1rem,2.4vw,1.5rem); border: 1px solid color-mix(in srgb,var(--accent) 20%,var(--surface)); border-radius: calc(var(--radius) * 1.6); background: linear-gradient(155deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface) 40%); box-shadow: 0 24px 64px color-mix(in srgb,var(--text) 9%,transparent),0 4px 12px color-mix(in srgb,var(--accent) 6%,transparent); }
+    .c083dd6 { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .7rem; margin-bottom: 1rem; }
+    .c083dd6 h2 { margin: 0; font-size: 1.35rem; letter-spacing: -.035em; }
+    .ccded90 { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .65rem; border: 1px solid color-mix(in srgb,var(--accent) 16%,transparent); border-radius: 999px; background: color-mix(in srgb,var(--accent) 8%,var(--surface)); color: var(--accent); font-size: .72rem; font-weight: 600; }
+    .ccded90::before { content: ""; width: .35rem; height: .35rem; border-radius: 50%; background: var(--accent); }
+    .route { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: .8rem; padding: .8rem; margin-bottom: 1rem; border: 1px solid color-mix(in srgb,var(--text) 9%,transparent); border-radius: var(--radius); background: var(--surface); }
+    .endpoint { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; }
+    .endpoint:last-child { align-items: flex-end; }
+    .endpoint-label, .c0aac97 { color: var(--muted); font-size: .78rem; font-weight: 500; }
+    .logo { display: flex; align-items: center; min-height: 36px; max-width: 100%; overflow-wrap: anywhere; font: 600 1rem/1.3 var(--display); }
+    .logo img, .logo svg { max-height: 36px; width: auto; max-width: 100%; object-fit: contain; }
+    .route-arrow { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: color-mix(in srgb,var(--accent) 9%,var(--surface)); }
+    .route-arrow .c947c36 { stroke: var(--accent); }
+    .c0aac97 { display: block; margin-bottom: .5rem; color: var(--text); }
+    .amount-field { display: flex; align-items: center; gap: .75rem; padding: .8rem 1rem; border: 1px solid color-mix(in srgb,var(--text) 18%,transparent); border-radius: var(--radius); background: var(--bg); transition: border-color .18s ease; }
+    .amount-field:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent); }
+    .amount-field input { width: 100%; min-width: 0; padding: .2rem 0; border: 0; background: var(--bg); color: var(--text); font: 550 1.6rem/1.2 var(--display); font-variant-numeric: tabular-nums; }
+    .amount-field input:focus { outline: 0; }
+    .unit { color: var(--muted); font-size: .8rem; }
+    .ce4fdf5 { margin: .45rem 0 .85rem; color: var(--muted); font-size: .74rem; }
+    .field-error { margin: .5rem 0; color: var(--text); font-size: .8rem; font-weight: 600; }
+    [hidden] { display: none !important; }
+    .estimate { padding: 1rem; border-radius: var(--radius); background: linear-gradient(120deg,color-mix(in srgb,var(--accent) 12%,var(--surface)),color-mix(in srgb,var(--accent) 4%,var(--surface))); }
+    .estimate-label { margin-bottom: .25rem; color: var(--muted); font-size: .8rem; }
+    .estimate-value { display: block; color: var(--text); font: 600 clamp(1.7rem,3vw,2.5rem)/1.3 var(--display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .estimate-value small { color: var(--muted); font: 400 .8rem/1.4 var(--body); letter-spacing: 0; }
+    .estimate dl { display: grid; gap: .5rem; margin: .8rem 0 0; padding-top: .8rem; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); font-size: .8rem; }
+    .estimate dl div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem 1rem; }
+    .estimate dt { color: var(--muted); }
+    .estimate dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .method { margin-block: .7rem; color: var(--muted); font-size: .75rem; }
+    .method summary { width: fit-content; color: var(--text); cursor: pointer; }
+    .method p { margin: .65rem 0 0; }
+    .caf849c > .c321902 { width: 100%; }
+    .c0c3706 { padding: .8rem 1rem; border: 1px solid color-mix(in srgb,var(--text) 10%,transparent); border-radius: var(--radius); background: var(--surface); }
+    .c172456 { margin-bottom: .45rem; }
+    .cb55d67 { display: flex; align-items: center; gap: .75rem; }
+    .c392845 { flex: 1; min-width: 0; padding: 0; border: 0; background: transparent; color: var(--text); font: 550 1.55rem/1.2 var(--display); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .c392845:focus { outline: 0; }
+    .c175250 { position: relative; display: inline-flex; align-items: center; gap: .5rem; flex: none; padding: .4rem 1.5rem .4rem .5rem; border: 1px solid color-mix(in srgb,var(--text) 13%,transparent); border-radius: 999px; background: var(--bg); }
+    .c7be42f { width: 22px; height: 22px; border-radius: 50%; object-fit: contain; flex: none; }
+    .c725b59 { border: 0; background: transparent; color: var(--text); font: 600 .95rem/1 var(--body); cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .c725b59:focus { outline: 0; }
+    .c175250::after { content: ""; position: absolute; right: .7rem; width: .42rem; height: .42rem; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-2px) rotate(45deg); pointer-events: none; }
+    .c6e8ea9 { margin-top: .4rem; color: var(--muted); font-size: .78rem; font-variant-numeric: tabular-nums; }
+    .c813586 { position: relative; z-index: 1; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; margin: -.55rem auto; padding: 0; border: 3px solid var(--surface); border-radius: 50%; background: color-mix(in srgb,var(--accent) 13%,var(--surface)); color: var(--accent); cursor: pointer; transition: transform .2s ease, background .2s ease; }
+    .c813586 svg { width: 1.1rem; height: 1.1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .c813586:hover { transform: rotate(180deg); background: color-mix(in srgb,var(--accent) 20%,var(--surface)); }
+    .c0e1834 { display: grid; gap: .5rem; margin: 1rem 0 0; padding-top: .9rem; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); font-size: .82rem; }
+    .c0e1834 div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .2rem 1rem; }
+    .c0e1834 dt { color: var(--muted); }
+    .c0e1834 dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .cdfa498 > .c321902 { width: 100%; margin-top: 1.05rem; }
+    .c817e1b { padding: 2rem; border: 1px solid color-mix(in srgb,var(--text) 10%,transparent); border-radius: calc(var(--radius) * 1.3); background: var(--surface); }
+    .c07fffc { margin-bottom: 1.3rem; font-size: 1.65rem; font-weight: 550; letter-spacing: -.035em; }
+    .c7df88d { max-width: 100%; overflow-x: auto; }
+    .c1879e2 { width: 100%; border-collapse: collapse; text-align: left; font-size: .92rem; }
+    .c1879e2 caption { padding-bottom: 1rem; text-align: left; color: var(--muted); }
+    .c1879e2 th, .c1879e2 td { padding: 1rem 1.1rem; border-bottom: 1px solid color-mix(in srgb,var(--text) 9%,transparent); vertical-align: top; overflow-wrap: anywhere; }
+    .c1879e2 th { color: var(--muted); font-weight: 500; }
+    .c1879e2 thead { background: color-mix(in srgb,var(--accent) 5%,var(--surface)); }
+    .c1879e2 tbody tr:last-child > * { border-bottom: 0; }
+    .cc08027 { max-width: 820px; padding-block: 4rem 2rem; }
+    .c1ae53e { margin-bottom: 3.3rem; }
+    .c7fdebc { margin: 0 0 1.1rem; font: 550 clamp(1.6rem,3vw,2.2rem)/1.2 var(--display); letter-spacing: -.035em; }
+    .cdc2c54 { color: var(--muted); line-height: 1.85; overflow-wrap: anywhere; }
+    .cdc2c54 p { margin-bottom: 1.2rem; }
+    .cdc2c54 strong, .cdc2c54 h3, .cdc2c54 h4 { color: var(--text); }
+    .cdc2c54 ul, .cdc2c54 ol { padding-left: 1.3rem; }
+    .cdc2c54 li { padding-left: .3rem; margin-block: .55rem; }
+    .cdc2c54 li::marker { color: var(--accent); }
+    .cdc2c54 blockquote { margin: 1.5rem 0; padding: 1rem 1.4rem; border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; background: var(--surface); color: var(--text); }
+    .cdc2c54 img { height: auto; border-radius: var(--radius); }
+    .cdc2c54 pre { overflow-x: auto; padding: 1rem; border-radius: var(--radius); background: var(--surface); }
+    .cdc2c54 code, .cdc2c54 pre { font-family: var(--body); }
+    .c867a7d { margin-block: .8rem; border: 1px solid color-mix(in srgb,var(--text) 11%,transparent); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+    .c133a22 { position: relative; padding: 1.3rem 3.5rem 1.3rem 1.4rem; list-style: none; cursor: pointer; color: var(--text); font: 550 1.04rem/1.5 var(--display); }
+    .c133a22::-webkit-details-marker { display: none; }
+    .c133a22::after { content: "+"; position: absolute; right: 1.4rem; top: 1.2rem; color: var(--accent); font-size: 1.3rem; }
+    details[open] > .c133a22::after { content: "−"; }
+    .c867a7d[open] { border-color: color-mix(in srgb,var(--accent) 35%,var(--surface)); }
+    .c133a22:focus-visible { outline-offset: -5px; }
+    .cb900ff { padding: 0 1.4rem 1.4rem; color: var(--muted); overflow-wrap: anywhere; }
+    .cb900ff > :last-child { margin-bottom: 0; }
+    .c9915ba { max-width: 820px; padding-block: 1.5rem 3.5rem; border-top: 1px solid color-mix(in srgb,var(--text) 12%,transparent); }
+    .c9915ba .c07fffc { font-size: 1.25rem; }
+    .c8b65ea { margin: 0; padding-left: 1.25rem; color: var(--muted); font-size: .88rem; }
+    .c88c9a1 { padding-block: .4rem; padding-left: .25rem; overflow-wrap: anywhere; }
+    .c88c9a1 a, a.c88c9a1 { color: var(--text); text-decoration-color: color-mix(in srgb,var(--accent) 45%,transparent); }
+    .c88c9a1 a:hover, a.c88c9a1:hover { color: var(--accent); }
+    .c6c19fa { border-top: 1px solid color-mix(in srgb,var(--text) 10%,transparent); }
+    .c3e8244 { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; min-height: 96px; padding-block: 1.5rem; color: var(--muted); font-size: .8rem; }
+    .c3e8244 p { margin: 0; }
+    .c3e8244 a { color: var(--muted); }
+    @media (max-width: 850px) { .c84f8d5 { grid-template-columns: minmax(0,1fr); gap: 2.5rem; padding-block: 2.5rem 3.5rem; } .c74f46b { max-width: 650px; } .caf849c { width: 100%; max-width: 600px; justify-self: center; } h1 { font-size: clamp(2.5rem,7vw,4rem); } .cb3b29b { max-width: 60ch; } }
+    @media (max-width: 540px) { .c0e3983 { width: calc(100% - 2rem); } .c227944 { min-height: 76px; gap: .7rem; } .c9484cb { font-size: .95rem; gap: .45rem; } .cf04331 { width: 2rem; height: 2rem; } .cb471e5 { gap: .6rem; } .cb471e5 > a:not(.c321902) { display: none; } .c227944 .c321902 { padding-inline: .85rem; font-size: .8rem; } .c817e1b { padding: 1.25rem; } .c1879e2 th, .c1879e2 td { padding: .8rem .55rem; } .c74f46b > .c321902 { width: 100%; } .cc08027 { padding-top: 2.8rem; } .c3e8244 { align-items: flex-start; flex-direction: column; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .c321902, .amount-field { transition: none; } .c321902:hover { transform: none; } }
+  </style>
 </head>
 <body>
-<div class="c0e3983">
-  <header class="c3212d9">
-    <div class="c9cf294"><span class="c1b4e65" aria-hidden="true">⇄</span><span>Exchange</span></div>
-    <a class="c5abe39" href="dashboard/">Swap <span aria-hidden="true">↗</span></a>
+  <a class="cd3770a" href="#content">Skip to content</a>
+  <header class="c19d383">
+    <nav class="c227944 c0e3983" aria-label="Primary navigation">
+      <a class="c9484cb" href="#top" aria-label="Swap station, top of page">
+        <span class="cf04331" aria-hidden="true"><svg class="c947c36" viewBox="0 0 24 24"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></svg></span>
+        Swap station
+      </a>
+      <div class="cb471e5">
+        <a href="#facts">Key facts</a>
+        <a href="#sources">Sources</a>
+        <a class="c321902" href="dashboard/">Swap</a>
+      </div>
+    </nav>
   </header>
-  <div class="cbb1366"><nav class="c83e7fc" aria-label="Breadcrumb"><a href="dashboard/">Home</a> <span>/</span> <span>Swaps</span> <span>/</span> <span>Litecoin Swap</span></nav></div>
-  <section class="c84f8d5" aria-labelledby="hero-title">
-    <div class="c7a7727">A direct route to your next asset</div>
-    <h1 id="hero-title">Litecoin <em>Swap</em>.</h1>
-    <p class="ceb0a68">A Litecoin Swap exchanges LTC for another asset — a stablecoin like USDC, another cryptocurrency, or back to BTC — directly from a self-custody wallet, without ever handing your coins to a custodian. Litecoin's short block time and low fees make it a practical settlement coin for payments and transfers, and a swap route quotes the amount you will receive before you confirm anything. You hold your private keys from the moment you submit the trade to the moment the new asset lands in your wallet.</p>
-    <div class="c37582d" role="group" aria-labelledby="exchange-title">
-      <div class="c938831">
-        <h2 id="exchange-title">Your exchange</h2>
-        <p>One route. Every detail in view.</p>
+  <div class="c0e3983" id="top">
+    <div class="c728825"><nav class="c83e7fc" aria-label="Breadcrumb"><a href="dashboard/">Home</a> <span>/</span> <span>Swaps</span> <span>/</span> <span>Litecoin Swap</span></nav></div>
+    <section class="c84f8d5" aria-labelledby="hero-title">
+      <div class="c74f46b">
+        <p class="c7a7727">All swap routes</p>
+        <h1 id="hero-title">Litecoin <em>Swap</em>.</h1>
+        <p class="cb3b29b">A Litecoin Swap exchanges LTC for another asset — a stablecoin like USDC, another cryptocurrency, or back to BTC — directly from a self-custody wallet, without ever handing your coins to a custodian.</p>
+        <a class="c321902" href="dashboard/">Swap <svg class="c947c36" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
       </div>
-      <div class="c518428">
-        <div class="c8e2496">
-          <label class="c0aac97" for="amount">You pay</label>
-          <input id="amount" name="amount" type="number" inputmode="decimal" min="1" max="1000000" step="any" value="1000" required aria-describedby="amount-help amount-message" aria-invalid="false">
-          <span class="c08c3b6" id="amount-help">From 1 to 1,000,000 units</span>
+      <aside class="caf849c cdfa498" data-from="LTC" aria-labelledby="widget-title">
+        <div class="c083dd6">
+          <h2 id="widget-title">Swap</h2>
+          <span class="ccded90">Best route</span>
         </div>
-        <div class="c20e88f" role="group" aria-label="Exchange route">
-          <span class="ce5c743"><img src="assets/tokens/ltc.svg" alt="Litecoin" width="28" height="28"></span>
-          <span class="cb28bc6" role="img" aria-label="to">→</span>
-          <span class="ce5c743"><img src="assets/tokens/usdc.svg" alt="USD Coin" width="28" height="28"></span>
+        <div class="c0c3706">
+          <div class="c172456"><span class="c0aac97">You pay</span></div>
+          <div class="cb55d67">
+            <input id="pay-amount" class="c392845" type="number" inputmode="decimal" min="0" max="1000000000" step="any" value="1" aria-label="Amount you pay">
+            <span class="c175250">
+              <img class="c7be42f" id="pay-ico" width="22" height="22" alt="" src="assets/tokens/eth.svg">
+              <select id="pay-token" class="c725b59" aria-label="Token you pay"></select>
+            </span>
+          </div>
+          <div class="c6e8ea9" id="pay-usd">—</div>
         </div>
-        <div class="c8e2496 cad023c">
-          <label class="c0aac97" for="received">You receive</label>
-          <output id="received" for="amount" aria-live="polite" aria-atomic="true">—</output>
-          <span class="c08c3b6">After network fee · destination units</span>
+        <button type="button" class="c813586" id="swap-switch" aria-label="Switch the two tokens">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v13m0 0-3-3m3 3 3-3M17 20V7m0 0-3 3m3-3 3 3"/></svg>
+        </button>
+        <div class="c0c3706">
+          <div class="c172456"><span class="c0aac97">You receive</span></div>
+          <div class="cb55d67">
+            <output id="get-amount" class="c392845" for="pay-amount">—</output>
+            <span class="c175250">
+              <img class="c7be42f" id="get-ico" width="22" height="22" alt="" src="assets/tokens/usdt.svg">
+              <select id="get-token" class="c725b59" aria-label="Token you receive"></select>
+            </span>
+          </div>
+          <div class="c6e8ea9" id="get-usd">—</div>
         </div>
-      </div>
-      <div class="cfddebc">
-        <dl class="cf5b80a">
-          <div><dt>Rate</dt><dd><output id="rate" for="amount">—</output></dd></div>
-          <div><dt>Network fee</dt><dd><output id="network-fee" for="amount">—</output></dd></div>
+        <dl class="c0e1834">
+          <div><dt>Rate</dt><dd id="swap-rate">—</dd></div>
+          <div><dt>Network fee</dt><dd id="swap-fee">0.3%</dd></div>
         </dl>
-        <a class="c0582c8" href="dashboard/"><span>Swap</span><span aria-hidden="true">→</span></a>
-      </div>
-      <p class="c59bcb6" id="amount-message" role="status" aria-live="polite"></p>
-    </div>
-  </section>
-  <ul class="c6ce1a4" aria-label="Exchange features">
-    <li>Non-custodial</li>
-    <li>On-chain</li>
-    <li>No sign-up</li>
-    <li>Transparent fees</li>
-  </ul>
-  <section class="c24a0b6" aria-labelledby="facts-title">
-    <h2 class="c07fffc" id="facts-title">Key facts</h2>
-    <div class="c7df88d" tabindex="0" role="region" aria-label="Key facts table"><table class="c1879e2"><tbody><tr><th scope="row">Pair</th><td>LTC to USDC, BTC or other tokens</td></tr>
+        <noscript><p class="ce4fdf5">Enable JavaScript to estimate the swap.</p></noscript>
+        <a class="c321902" href="dashboard/">Swap <svg class="c947c36" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      </aside>
+    </section>
+    <section class="c817e1b" id="facts" aria-labelledby="facts-title">
+      <h2 class="c07fffc" id="facts-title">Key facts</h2>
+      <div class="c7df88d"><table class="c1879e2"><tbody><tr><th scope="row">Pair</th><td>LTC to USDC, BTC or other tokens</td></tr>
 <tr><th scope="row">Block time</th><td>~2.5 minutes</td></tr>
 <tr><th scope="row">Network fee</th><td>Typically under $0.01</td></tr>
 <tr><th scope="row">Confirmations needed</th><td>1–3, route-dependent</td></tr>
 <tr><th scope="row">Custody</th><td>Self-custody — you hold your keys</td></tr>
 <tr><th scope="row">Mining algorithm</th><td>Scrypt</td></tr></tbody></table></div>
-  </section>
-  <main class="cdf848b" id="content">
+    </section>
+  </div>
+  <main class="cc08027 c0e3983" id="content">
     <section class="c1ae53e"><h2 class="c7fdebc">What a Litecoin Swap Is</h2><div class="cdc2c54"><strong>A Litecoin Swap is an on-chain or atomic exchange of LTC for another asset, settled directly between wallets or through a decentralized liquidity pool rather than inside a custodial order book.</strong> Litecoin launched in 2011 as a faster, cheaper sibling to Bitcoin — a two-and-a-half-minute block target instead of ten minutes, and a total supply four times larger — which is why it is still used as a payment and settlement coin long after newer chains promised more features. A Litecoin Swap takes advantage of that speed: you quote a pair, LTC against USDC or LTC against BTC, see the rate and the amount that will arrive, and sign once. Nothing sits in an exchange's custody while the trade executes, and nothing requires a sign-up form.<h3>Why Litecoin Still Matters for Payments</h3>Litecoin was designed around fast confirmation and cheap fees rather than smart-contract features, and that narrow focus is still its strength. The <a href="https://litecoin.org/" rel="nofollow noopener" target="_blank">Litecoin documentation</a> describes the same Scrypt proof-of-work chain that has run essentially unchanged for over a decade, which is part of why merchants and remittance services treat it as a stable settlement rail rather than a speculative asset.<h3>Atomic Swaps vs. Trading on a Custodial Exchange</h3>An atomic swap either completes fully on both sides or not at all, using a hashed time-lock so neither party can walk away with both assets. A custodial exchange instead matches your order against its own books and holds your coins until you withdraw. A Litecoin Swap built on atomic or pooled liquidity skips that custody step entirely.</div></section>
 <section class="c1ae53e"><h2 class="c7fdebc">How a Litecoin Swap Works</h2><div class="cdc2c54">Every Litecoin Swap follows the same mechanical shape regardless of which pair you pick. A router or liquidity pool holds reserves of both assets; you submit the amount of LTC you want to spend, the route calculates the output based on current reserves and fees, and you see the minimum amount you will receive before slippage eats into the trade. Once you confirm, the LTC leaves your wallet and the other asset — say, USDC — is credited to the same address, usually within one additional Litecoin confirmation. No intermediary holds your coins between those two steps, and no account balance exists anywhere except on-chain.<h3>Pooled Liquidity vs. Direct Peer Matching</h3>Some routes fill a Litecoin Swap from a shared liquidity pool, pricing the trade off the ratio of reserves on each side. Others match your order directly against another trader's order at an agreed rate. Pooled liquidity is usually available instantly for common pairs like LTC and USDC; direct matching can offer a tighter rate but may need to wait for a counterparty.<h3>Why the Quoted Rate Can Move Before You Sign</h3>The rate a route shows is only locked in once your transaction confirms, so a busy market can shift the output slightly between the quote and the confirmation. Slippage tolerance is the buffer you set for that movement — too tight and the trade can fail, too loose and you risk a worse fill than expected.</div></section>
 <section class="c1ae53e"><h2 class="c7fdebc">Litecoin Swap Fees and Confirmation Times</h2><div class="cdc2c54">Cost and timing are the two numbers worth checking before any Litecoin Swap. Litecoin's network fee is typically a fraction of a cent because its short block interval keeps the mempool thin, so almost all of what you pay goes to the swap route's own fee rather than the chain itself. Confirmation speed depends on how many blocks the route wants before it treats a deposit as final; most LTC pairs accept the trade after one to three confirmations, each roughly two and a half minutes apart. You can verify any transaction yourself on a <a href="https://blockchair.com/litecoin" rel="nofollow noopener" target="_blank">explorer</a> rather than trusting a dashboard's word for it.<table><thead><tr><th>Step</th><th>Typical cost</th><th>Typical time</th></tr></thead><tbody><tr><td>Network fee (LTC)</td><td>Under $0.01 per transaction</td><td>~2.5 minutes per block</td></tr><tr><td>Swap route fee</td><td>0.1%–0.3% of trade size</td><td>Included in the quote</td></tr><tr><td>Confirmation before credit</td><td>1–3 confirmations</td><td>3–8 minutes total</td></tr></tbody></table></div></section>
@@ -1117,71 +241,66 @@ a.c88c9a1:hover {
 <details class="c867a7d"><summary class="c133a22">Is a Litecoin Swap safe?</summary><div class="cb900ff">A non-custodial Litecoin Swap is as safe as the wallet and route you use: your keys never leave your device, so the main risks are confirming the wrong amount or approving an unlimited allowance. Check both before you sign.</div></details>
 <details class="c867a7d"><summary class="c133a22">What happens if my Litecoin Swap fails?</summary><div class="cb900ff">A failed transaction reverts on-chain and you keep your LTC; only the small network fee spent on the attempt is lost. Nothing is credited on the other side until the swap transaction confirms.</div></details>
   </main>
-  <section class="c8c6551 cdf848b" aria-labelledby="sources-title">
+  <section class="c9915ba c0e3983" id="sources" aria-labelledby="sources-title">
     <h2 class="c07fffc" id="sources-title">Sources</h2>
     <ul class="c8b65ea"><li><a class="c88c9a1" href="https://litecoin.org/" rel="nofollow noopener" target="_blank">Litecoin documentation</a></li>
 <li><a class="c88c9a1" href="https://blockchair.com/litecoin" rel="nofollow noopener" target="_blank">Litecoin block explorer</a></li>
 <li><a class="c88c9a1" href="https://en.wikipedia.org/wiki/Litecoin" rel="nofollow noopener" target="_blank">Litecoin — Wikipedia</a></li>
 <li><a class="c88c9a1" href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a></li></ul>
   </section>
-  <footer class="c886ce4">
-    <span class="c4ce46e">Exchange</span>
-    <p class="c85582a">Updated <span>Updated Oct 10, 2026</span></p>
+  <footer class="c6c19fa">
+    <div class="c3e8244 c0e3983">
+      <p>Updated Oct 11, 2026</p>
+      <a href="#top">Back to top ↑</a>
+    </div>
   </footer>
-</div>
-<script>
-(() => {
-  'use strict';
-  const amount = document.getElementById('amount');
-  const received = document.getElementById('received');
-  const rateOutput = document.getElementById('rate');
-  const feeOutput = document.getElementById('network-fee');
-  const message = document.getElementById('amount-message');
-  const exchangeRate = 0.985;
-  const baseFee = 0.25;
-  const networkFactor = 0.001;
-  const formatter = new Intl.NumberFormat('en-US', { maximumFractionDigits: 6 });
-  let timer;
-
-  function clearQuote() {
-    received.value = '—';
-    rateOutput.value = '—';
-    feeOutput.value = '—';
-  }
-
-  function updateQuote() {
-    clearTimeout(timer);
-    const raw = amount.value.trim();
-    const value = amount.valueAsNumber;
-    const valid = raw !== '' && Number.isFinite(value) && value >= 1 && value <= 1000000 && !amount.validity.badInput;
-    amount.setAttribute('aria-invalid', String(!valid));
-    message.dataset.invalid = String(!valid);
-    if (!valid) {
-      clearQuote();
-      const error = 'Enter an amount from 1 to 1,000,000.';
-      amount.setCustomValidity(error);
-      message.textContent = error;
-      return;
-    }
-    amount.setCustomValidity('');
-    const networkFee = baseFee + value * networkFactor;
-    const netAmount = Math.max(0, value * exchangeRate - networkFee);
-    received.value = formatter.format(netAmount);
-    rateOutput.value = '1 → ' + formatter.format(exchangeRate);
-    feeOutput.value = formatter.format(networkFee) + ' destination units';
-    message.textContent = '';
-  }
-
-  amount.addEventListener('input', () => {
-    clearTimeout(timer);
-    amount.setCustomValidity('');
-    clearQuote();
-    timer = setTimeout(updateQuote, 200);
-  });
-  amount.addEventListener('change', updateQuote);
-  amount.addEventListener('blur', updateQuote);
-  updateQuote();
-})();
-</script>
+  <script>
+    (() => {
+      const TOKENS = [
+        { s: 'ETH', f: 'eth', p: 2550 }, { s: 'BTC', f: 'btc', p: 62000 },
+        { s: 'USDT', f: 'usdt', p: 1 }, { s: 'USDC', f: 'usdc', p: 1 },
+        { s: 'BNB', f: 'bnb', p: 585 }, { s: 'SOL', f: 'sol', p: 145 },
+        { s: 'ARB', f: 'arb', p: 0.62 }, { s: 'OP', f: 'optimism', p: 1.65 },
+        { s: 'MATIC', f: 'polygon', p: 0.42 }, { s: 'AVAX', f: 'avalanche', p: 27 },
+        { s: 'SUI', f: 'sui', p: 1.35 }, { s: 'LTC', f: 'ltc', p: 72 },
+        { s: 'TRX', f: 'trx', p: 0.16 }, { s: 'XMR', f: 'xmr', p: 155 },
+        { s: 'XRP', f: 'xrp', p: 0.52 }, { s: 'ZEC', f: 'zec', p: 32 }
+      ];
+      const FEE = 0.003;
+      const $ = (id) => document.getElementById(id);
+      const payAmt = $('pay-amount'), payTok = $('pay-token'), payUsd = $('pay-usd'), payIco = $('pay-ico');
+      const getAmt = $('get-amount'), getTok = $('get-token'), getUsd = $('get-usd'), getIco = $('get-ico');
+      const rateEl = $('swap-rate');
+      const tok = (s) => TOKENS.find((t) => t.s === s);
+      const num = (n) => new Intl.NumberFormat('en', { maximumFractionDigits: n >= 1 ? 4 : 6 }).format(n);
+      const usd = (v) => '~$' + new Intl.NumberFormat('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
+      TOKENS.forEach((t) => {
+        [payTok, getTok].forEach((sel) => { const o = document.createElement('option'); o.value = t.s; o.textContent = t.s; sel.appendChild(o); });
+      });
+      const widget = document.querySelector('.cdfa498');
+      const defFrom = (widget && widget.dataset.from) || 'ETH';
+      const fromOk = TOKENS.some((t) => t.s === defFrom) ? defFrom : 'ETH';
+      payTok.value = fromOk;
+      getTok.value = (fromOk === 'USDT') ? 'ETH' : 'USDT';
+      const calc = () => {
+        const pf = tok(payTok.value), gt = tok(getTok.value);
+        payIco.src = 'assets/tokens/' + pf.f + '.svg'; payIco.alt = pf.s;
+        getIco.src = 'assets/tokens/' + gt.f + '.svg'; getIco.alt = gt.s;
+        rateEl.textContent = '1 ' + pf.s + ' ≈ ' + num(pf.p / gt.p) + ' ' + gt.s;
+        const a = parseFloat(payAmt.value);
+        if (!Number.isFinite(a) || a <= 0) { getAmt.textContent = '—'; payUsd.textContent = '—'; getUsd.textContent = '—'; return; }
+        const out = a * (pf.p / gt.p) * (1 - FEE);
+        getAmt.textContent = num(out) + ' ' + gt.s;
+        payUsd.textContent = usd(a * pf.p);
+        getUsd.textContent = usd(out * gt.p);
+      };
+      const distinct = (changed, other) => { if (changed.value === other.value) { other.value = (TOKENS.find((t) => t.s !== changed.value) || TOKENS[0]).s; } };
+      payAmt.addEventListener('input', calc);
+      payTok.addEventListener('change', () => { distinct(payTok, getTok); calc(); });
+      getTok.addEventListener('change', () => { distinct(getTok, payTok); calc(); });
+      $('swap-switch').addEventListener('click', () => { const t = payTok.value; payTok.value = getTok.value; getTok.value = t; calc(); });
+      calc();
+    })();
+  </script>
 </body>
 </html>
