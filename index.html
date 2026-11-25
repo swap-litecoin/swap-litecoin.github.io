@@ -1,306 +1,285 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Litecoin Swap — Trade LTC for USDC, BTC & Tokens</title>
-  <meta name="description" content="Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.">
-  <link rel="canonical" href="https://swap-litecoin.github.io/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Litecoin Swap">
-  <meta property="og:description" content="Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.">
-  <meta property="og:url" content="https://swap-litecoin.github.io/">
-  <meta property="og:image" content="https://swap-litecoin.github.io/og.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Litecoin Swap">
-  <meta name="twitter:description" content="Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.">
-  <meta name="twitter:image" content="https://swap-litecoin.github.io/og.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://swap-litecoin.github.io/#website", "url": "https://swap-litecoin.github.io/", "name": "Litecoin Swap — Trade LTC for USDC, BTC & Tokens"}, {"@type": "WebPage", "@id": "https://swap-litecoin.github.io/#webpage", "url": "https://swap-litecoin.github.io/", "name": "Litecoin Swap — Trade LTC for USDC, BTC & Tokens", "isPartOf": {"@id": "https://swap-litecoin.github.io/#website"}, "description": "Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.", "datePublished": "2026-11-06", "dateModified": "2026-11-06"}, {"@type": "SoftwareApplication", "name": "Litecoin Swap", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://swap-litecoin.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Swaps"}, {"@type": "ListItem", "position": 3, "name": "Litecoin Swap"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a Litecoin Swap?", "acceptedAnswer": {"@type": "Answer", "text": "A Litecoin Swap is an exchange of LTC for another asset — a stablecoin, another cryptocurrency, or BTC — settled on-chain or through a decentralized pool rather than inside a custodial exchange order book."}}, {"@type": "Question", "name": "How long does a Litecoin Swap take?", "acceptedAnswer": {"@type": "Answer", "text": "Most routes credit the new asset after one to three Litecoin confirmations, each about two and a half minutes apart, so a typical Litecoin Swap finishes within three to eight minutes."}}, {"@type": "Question", "name": "How much does a Litecoin Swap cost?", "acceptedAnswer": {"@type": "Answer", "text": "You pay Litecoin's small network fee, usually under a cent, plus the route's own fee, typically between 0.1% and 0.3% of the trade size. Both figures are shown in the quote before you sign."}}, {"@type": "Question", "name": "Can I swap LTC directly for USDC?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. An LTC-to-USDC route quotes the current rate and the minimum amount you will receive, then credits USDC to the same wallet once the transaction confirms — no separate account or exchange deposit required."}}, {"@type": "Question", "name": "Do I need an account to do a Litecoin Swap?", "acceptedAnswer": {"@type": "Answer", "text": "No. A self-custody Litecoin Swap only needs a connected wallet. There is no sign-up, no KYC form, and no balance held anywhere except on-chain."}}, {"@type": "Question", "name": "Is a Litecoin Swap safe?", "acceptedAnswer": {"@type": "Answer", "text": "A non-custodial Litecoin Swap is as safe as the wallet and route you use: your keys never leave your device, so the main risks are confirming the wrong amount or approving an unlimited allowance. Check both before you sign."}}, {"@type": "Question", "name": "What happens if my Litecoin Swap fails?", "acceptedAnswer": {"@type": "Answer", "text": "A failed transaction reverts on-chain and you keep your LTC; only the small network fee spent on the attempt is lost. Nothing is credited on the other side until the swap transaction confirms."}}]}]}</script>
-  <style>
-    :root{--bg:#0A0D13;--surface:#141B25;--text:#E9EFF6;--muted:#8794A6;--accent:#5B8CFF;--accent-ink:#05101F;--radius:14px;--display:"Space Grotesk";--body:"Inter"}
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
-    body { margin: 0; background: var(--bg); color: var(--text); font: 400 1rem/1.7 var(--body); -webkit-font-smoothing: antialiased; }
-    a { color: var(--accent); text-underline-offset: .22em; }
-    a:hover { text-decoration-thickness: .12em; }
-    :focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
-    ::selection { background: var(--accent); color: var(--accent-ink); }
-    h1, h2, h3, h4, h5, h6 { font-family: var(--display); line-height: 1.15; text-wrap: balance; }
-    p, h1, h2, h3 { margin-top: 0; }
-    img, svg { max-width: 100%; vertical-align: middle; }
-    .c0e3983 { width: min(1180px, calc(100% - 3rem)); margin-inline: auto; }
-    .cd3770a { position: absolute; z-index: 5; top: .5rem; left: 1rem; padding: .7rem 1rem; background: var(--surface); transform: translateY(-180%); border-radius: var(--radius); }
-    .cd3770a:focus { transform: translateY(0); }
-    .c19d383 { border-bottom: 1px solid color-mix(in srgb,var(--text) 10%,transparent); }
-    .c227944 { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
-    .c9484cb { display: inline-flex; align-items: center; gap: .7rem; color: var(--text); font: 650 1.12rem/1.2 var(--display); text-decoration: none; }
-    .cf04331 { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: calc(var(--radius) * .6); background: var(--accent); color: var(--accent-ink); }
-    .c947c36 { width: 1.2rem; height: 1.2rem; fill: none; stroke: var(--accent-ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
-    .cb471e5 { display: flex; align-items: center; gap: 1.8rem; }
-    .cb471e5 > a { font-size: .88rem; font-weight: 600; text-decoration: none; }
-    .cb471e5 > a:not(.c321902) { color: var(--muted); }
-    .c321902 { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-height: 52px; padding: .85rem 1.4rem; border: 1px solid color-mix(in srgb,var(--accent-ink) 12%,transparent); border-radius: var(--radius); background: linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 88%,var(--text))); color: var(--accent-ink); font: 650 .95rem/1.3 var(--body); text-decoration: none; box-shadow: 0 6px 18px color-mix(in srgb,var(--accent) 17%,transparent); transition: transform .18s ease, box-shadow .18s ease; }
-    .c321902:hover { transform: translateY(-2px); box-shadow: 0 9px 24px color-mix(in srgb,var(--accent) 25%,transparent); }
-    .c227944 .c321902 { min-height: 42px; padding: .65rem 1rem; }
-    .c728825 { padding-block: 1rem 0; color: var(--muted); font-size: .8rem; overflow-wrap: anywhere; }
-    .c83e7fc { color: var(--muted); }
-    .c83e7fc a, a.c83e7fc { color: var(--muted); text-decoration: none; }
-    .c83e7fc a:hover, a.c83e7fc:hover { color: var(--accent); text-decoration: underline; }
-    .c83e7fc ol, .c83e7fc ul { display: flex; flex-wrap: wrap; gap: .5rem 1rem; padding: 0; margin: 0; list-style: none; }
-    .c84f8d5 { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: clamp(2rem,5vw,4.5rem); align-items: start; padding-block: 1.5rem 3rem; }
-    .c7a7727 { display: inline-flex; align-items: center; gap: .55rem; margin-bottom: 1.3rem; color: var(--accent); font-size: .86rem; font-weight: 600; }
-    .c7a7727::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb,var(--accent) 9%,transparent); }
-    h1 { margin-bottom: 1.4rem; font-size: clamp(2.5rem,4.7vw,4.35rem); font-weight: 600; letter-spacing: -.055em; overflow-wrap: anywhere; }
-    h1 em { color: var(--accent); font-style: normal; }
-    .cb3b29b { max-width: 48ch; margin-bottom: 2rem; color: var(--muted); font-size: 1.08rem; line-height: 1.8; }
-    .caf849c { position: relative; min-width: 0; padding: clamp(1.1rem,2.4vw,1.5rem); border: 1px solid color-mix(in srgb,var(--accent) 20%,var(--surface)); border-radius: calc(var(--radius) * 1.6); background: linear-gradient(155deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface) 40%); box-shadow: 0 24px 64px color-mix(in srgb,var(--text) 9%,transparent),0 4px 12px color-mix(in srgb,var(--accent) 6%,transparent); }
-    .c083dd6 { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .7rem; margin-bottom: 1rem; }
-    .c083dd6 h2 { margin: 0; font-size: 1.35rem; letter-spacing: -.035em; }
-    .ccded90 { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .65rem; border: 1px solid color-mix(in srgb,var(--accent) 16%,transparent); border-radius: 999px; background: color-mix(in srgb,var(--accent) 8%,var(--surface)); color: var(--accent); font-size: .72rem; font-weight: 600; }
-    .ccded90::before { content: ""; width: .35rem; height: .35rem; border-radius: 50%; background: var(--accent); }
-    .route { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: .8rem; padding: .8rem; margin-bottom: 1rem; border: 1px solid color-mix(in srgb,var(--text) 9%,transparent); border-radius: var(--radius); background: var(--surface); }
-    .endpoint { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; }
-    .endpoint:last-child { align-items: flex-end; }
-    .endpoint-label, .c0aac97 { color: var(--muted); font-size: .78rem; font-weight: 500; }
-    .logo { display: flex; align-items: center; min-height: 36px; max-width: 100%; overflow-wrap: anywhere; font: 600 1rem/1.3 var(--display); }
-    .logo img, .logo svg { max-height: 36px; width: auto; max-width: 100%; object-fit: contain; }
-    .route-arrow { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: color-mix(in srgb,var(--accent) 9%,var(--surface)); }
-    .route-arrow .c947c36 { stroke: var(--accent); }
-    .c0aac97 { display: block; margin-bottom: .5rem; color: var(--text); }
-    .amount-field { display: flex; align-items: center; gap: .75rem; padding: .8rem 1rem; border: 1px solid color-mix(in srgb,var(--text) 18%,transparent); border-radius: var(--radius); background: var(--bg); transition: border-color .18s ease; }
-    .amount-field:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent); }
-    .amount-field input { width: 100%; min-width: 0; padding: .2rem 0; border: 0; background: var(--bg); color: var(--text); font: 550 1.6rem/1.2 var(--display); font-variant-numeric: tabular-nums; }
-    .amount-field input:focus { outline: 0; }
-    .unit { color: var(--muted); font-size: .8rem; }
-    .ce4fdf5 { margin: .45rem 0 .85rem; color: var(--muted); font-size: .74rem; }
-    .field-error { margin: .5rem 0; color: var(--text); font-size: .8rem; font-weight: 600; }
-    [hidden] { display: none !important; }
-    .estimate { padding: 1rem; border-radius: var(--radius); background: linear-gradient(120deg,color-mix(in srgb,var(--accent) 12%,var(--surface)),color-mix(in srgb,var(--accent) 4%,var(--surface))); }
-    .estimate-label { margin-bottom: .25rem; color: var(--muted); font-size: .8rem; }
-    .estimate-value { display: block; color: var(--text); font: 600 clamp(1.7rem,3vw,2.5rem)/1.3 var(--display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-    .estimate-value small { color: var(--muted); font: 400 .8rem/1.4 var(--body); letter-spacing: 0; }
-    .estimate dl { display: grid; gap: .5rem; margin: .8rem 0 0; padding-top: .8rem; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); font-size: .8rem; }
-    .estimate dl div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem 1rem; }
-    .estimate dt { color: var(--muted); }
-    .estimate dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
-    .method { margin-block: .7rem; color: var(--muted); font-size: .75rem; }
-    .method summary { width: fit-content; color: var(--text); cursor: pointer; }
-    .method p { margin: .65rem 0 0; }
-    .caf849c > .c321902 { width: 100%; }
-    .c0c3706 { padding: .8rem 1rem; border: 1px solid color-mix(in srgb,var(--text) 10%,transparent); border-radius: var(--radius); background: var(--surface); }
-    .c172456 { margin-bottom: .45rem; }
-    .cb55d67 { display: flex; align-items: center; gap: .75rem; }
-    .c392845 { flex: 1; min-width: 0; padding: 0; border: 0; background: transparent; color: var(--text); font: 550 1.55rem/1.2 var(--display); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-    .c392845:focus { outline: 0; }
-    .c175250 { position: relative; display: inline-flex; align-items: center; gap: .5rem; flex: none; padding: .4rem 1.5rem .4rem .5rem; border: 1px solid color-mix(in srgb,var(--text) 13%,transparent); border-radius: 999px; background: var(--bg); }
-    .c7be42f { width: 22px; height: 22px; border-radius: 50%; object-fit: contain; flex: none; }
-    .c725b59 { border: 0; background: transparent; color: var(--text); font: 600 .95rem/1 var(--body); cursor: pointer; appearance: none; -webkit-appearance: none; }
-    .c725b59:focus { outline: 0; }
-    .c175250::after { content: ""; position: absolute; right: .7rem; width: .42rem; height: .42rem; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-2px) rotate(45deg); pointer-events: none; }
-    .c6e8ea9 { margin-top: .4rem; color: var(--muted); font-size: .78rem; font-variant-numeric: tabular-nums; }
-    .c813586 { position: relative; z-index: 1; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; margin: -.55rem auto; padding: 0; border: 3px solid var(--surface); border-radius: 50%; background: color-mix(in srgb,var(--accent) 13%,var(--surface)); color: var(--accent); cursor: pointer; transition: transform .2s ease, background .2s ease; }
-    .c813586 svg { width: 1.1rem; height: 1.1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .c813586:hover { transform: rotate(180deg); background: color-mix(in srgb,var(--accent) 20%,var(--surface)); }
-    .c0e1834 { display: grid; gap: .5rem; margin: 1rem 0 0; padding-top: .9rem; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); font-size: .82rem; }
-    .c0e1834 div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .2rem 1rem; }
-    .c0e1834 dt { color: var(--muted); }
-    .c0e1834 dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
-    .cdfa498 > .c321902 { width: 100%; margin-top: 1.05rem; }
-    .c817e1b { padding: 2rem; border: 1px solid color-mix(in srgb,var(--text) 10%,transparent); border-radius: calc(var(--radius) * 1.3); background: var(--surface); }
-    .c07fffc { margin-bottom: 1.3rem; font-size: 1.65rem; font-weight: 550; letter-spacing: -.035em; }
-    .c7df88d { max-width: 100%; overflow-x: auto; }
-    .c1879e2 { width: 100%; border-collapse: collapse; text-align: left; font-size: .92rem; }
-    .c1879e2 caption { padding-bottom: 1rem; text-align: left; color: var(--muted); }
-    .c1879e2 th, .c1879e2 td { padding: 1rem 1.1rem; border-bottom: 1px solid color-mix(in srgb,var(--text) 9%,transparent); vertical-align: top; overflow-wrap: anywhere; }
-    .c1879e2 th { color: var(--muted); font-weight: 500; }
-    .c1879e2 thead { background: color-mix(in srgb,var(--accent) 5%,var(--surface)); }
-    .c1879e2 tbody tr:last-child > * { border-bottom: 0; }
-    .cc08027 { max-width: 820px; padding-block: 4rem 2rem; }
-    .c1ae53e { margin-bottom: 3.3rem; }
-    .c7fdebc { margin: 0 0 1.1rem; font: 550 clamp(1.6rem,3vw,2.2rem)/1.2 var(--display); letter-spacing: -.035em; }
-    .cdc2c54 { color: var(--muted); line-height: 1.85; overflow-wrap: anywhere; }
-    .cdc2c54 p { margin-bottom: 1.2rem; }
-    .cdc2c54 strong, .cdc2c54 h3, .cdc2c54 h4 { color: var(--text); }
-    .cdc2c54 ul, .cdc2c54 ol { padding-left: 1.3rem; }
-    .cdc2c54 li { padding-left: .3rem; margin-block: .55rem; }
-    .cdc2c54 li::marker { color: var(--accent); }
-    .cdc2c54 blockquote { margin: 1.5rem 0; padding: 1rem 1.4rem; border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; background: var(--surface); color: var(--text); }
-    .cdc2c54 img { height: auto; border-radius: var(--radius); }
-    .cdc2c54 pre { overflow-x: auto; padding: 1rem; border-radius: var(--radius); background: var(--surface); }
-    .cdc2c54 code, .cdc2c54 pre { font-family: var(--body); }
-    .c867a7d { margin-block: .8rem; border: 1px solid color-mix(in srgb,var(--text) 11%,transparent); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
-    .c133a22 { position: relative; padding: 1.3rem 3.5rem 1.3rem 1.4rem; list-style: none; cursor: pointer; color: var(--text); font: 550 1.04rem/1.5 var(--display); }
-    .c133a22::-webkit-details-marker { display: none; }
-    .c133a22::after { content: "+"; position: absolute; right: 1.4rem; top: 1.2rem; color: var(--accent); font-size: 1.3rem; }
-    details[open] > .c133a22::after { content: "−"; }
-    .c867a7d[open] { border-color: color-mix(in srgb,var(--accent) 35%,var(--surface)); }
-    .c133a22:focus-visible { outline-offset: -5px; }
-    .cb900ff { padding: 0 1.4rem 1.4rem; color: var(--muted); overflow-wrap: anywhere; }
-    .cb900ff > :last-child { margin-bottom: 0; }
-    .c9915ba { max-width: 820px; padding-block: 1.5rem 3.5rem; border-top: 1px solid color-mix(in srgb,var(--text) 12%,transparent); }
-    .c9915ba .c07fffc { font-size: 1.25rem; }
-    .c8b65ea { margin: 0; padding-left: 1.25rem; color: var(--muted); font-size: .88rem; }
-    .c88c9a1 { padding-block: .4rem; padding-left: .25rem; overflow-wrap: anywhere; }
-    .c88c9a1 a, a.c88c9a1 { color: var(--text); text-decoration-color: color-mix(in srgb,var(--accent) 45%,transparent); }
-    .c88c9a1 a:hover, a.c88c9a1:hover { color: var(--accent); }
-    .c6c19fa { border-top: 1px solid color-mix(in srgb,var(--text) 10%,transparent); }
-    .c3e8244 { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; min-height: 96px; padding-block: 1.5rem; color: var(--muted); font-size: .8rem; }
-    .c3e8244 p { margin: 0; }
-    .c3e8244 a { color: var(--muted); }
-    @media (max-width: 850px) { .c84f8d5 { grid-template-columns: minmax(0,1fr); gap: 2.5rem; padding-block: 2.5rem 3.5rem; } .c74f46b { max-width: 650px; } .caf849c { width: 100%; max-width: 600px; justify-self: center; } h1 { font-size: clamp(2.5rem,7vw,4rem); } .cb3b29b { max-width: 60ch; } }
-    @media (max-width: 540px) { .c0e3983 { width: calc(100% - 2rem); } .c227944 { min-height: 76px; gap: .7rem; } .c9484cb { font-size: .95rem; gap: .45rem; } .cf04331 { width: 2rem; height: 2rem; } .cb471e5 { gap: .6rem; } .cb471e5 > a:not(.c321902) { display: none; } .c227944 .c321902 { padding-inline: .85rem; font-size: .8rem; } .c817e1b { padding: 1.25rem; } .c1879e2 th, .c1879e2 td { padding: .8rem .55rem; } .c74f46b > .c321902 { width: 100%; } .cc08027 { padding-top: 2.8rem; } .c3e8244 { align-items: flex-start; flex-direction: column; } }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .c321902, .amount-field { transition: none; } .c321902:hover { transform: none; } }
-  </style>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Litecoin Swap — Swap LTC Across Chains</title>
+<meta name="description" content="Litecoin Swap lets you swap LTC to and from USDT, USDC, ETH and other assets across chains. Send from your own wallet, review the quote — non-custodial.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#f6f5f4">
+<link rel="canonical" href="https://swap-litecoin.github.io/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Litecoin Swap"><meta property="og:title" content="Litecoin Swap — Swap LTC Across Chains"><meta property="og:description" content="Litecoin Swap lets you swap LTC to and from USDT, USDC, ETH and other assets across chains. Send from your own wallet, review the quote — non-custodial."><meta property="og:url" content="https://swap-litecoin.github.io/"><meta property="og:image" content="https://swap-litecoin.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Litecoin Swap — Swap LTC Across Chains"><meta name="twitter:description" content="Litecoin Swap lets you swap LTC to and from USDT, USDC, ETH and other assets across chains. Send from your own wallet, review the quote — non-custodial."><meta name="twitter:image" content="https://swap-litecoin.github.io/og-image.png">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://swap-litecoin.github.io/#organization","name":"Litecoin Swap","url":"https://swap-litecoin.github.io/","description":"Litecoin Swap lets you swap LTC to and from USDT, USDC, ETH and other assets across chains. Send from your own wallet, review the quote — non-custodial.","logo":{"@type":"ImageObject","@id":"https://swap-litecoin.github.io/#logo","url":"https://swap-litecoin.github.io/icon.svg","caption":"Litecoin Swap"}},{"@type":"WebSite","@id":"https://swap-litecoin.github.io/#website","url":"https://swap-litecoin.github.io/","publisher":{"@id":"https://swap-litecoin.github.io/#organization"},"name":"Litecoin Swap"},{"@type":"WebPage","@id":"https://swap-litecoin.github.io/#webpage","url":"https://swap-litecoin.github.io/","publisher":{"@id":"https://swap-litecoin.github.io/#organization"},"name":"Litecoin Swap — Swap LTC Across Chains","isPartOf":{"@id":"https://swap-litecoin.github.io/#website"},"mainEntity":{"@id":"https://swap-litecoin.github.io/#app"},"breadcrumb":{"@id":"https://swap-litecoin.github.io/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://swap-litecoin.github.io/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swap-litecoin.github.io/"},{"@type":"ListItem","position":2,"name":"Litecoin Swap","item":"https://swap-litecoin.github.io/"}]},{"@type":"WebApplication","@id":"https://swap-litecoin.github.io/#app","url":"https://swap-litecoin.github.io/","publisher":{"@id":"https://swap-litecoin.github.io/#organization"},"name":"Litecoin Swap","applicationCategory":"FinanceApplication","operatingSystem":"Web","description":"Litecoin Swap lets you swap LTC to and from USDT, USDC, ETH and other assets across chains. Send from your own wallet, review the quote — non-custodial.","isPartOf":{"@id":"https://swap-litecoin.github.io/#website"}},{"@type":"FAQPage","@id":"https://swap-litecoin.github.io/#faq","isPartOf":{"@id":"https://swap-litecoin.github.io/#webpage"},"about":{"@id":"https://swap-litecoin.github.io/#app"},"name":"Litecoin Swap FAQ","mainEntity":[{"@type":"Question","name":"How does Litecoin Swap work if Litecoin has no smart contracts?","acceptedAnswer":{"@type":"Answer","text":"Litecoin cannot run on-chain swap pools, so a swap involving LTC is cross-chain. You send LTC from your own wallet, a route exchanges it for the asset on the other chain, and the result is delivered to the address you entered."}},{"@type":"Question","name":"Which assets can I swap LTC with?","acceptedAnswer":{"@type":"Answer","text":"LTC can be swapped to or from assets on other chains such as USDT, USDC or ETH, depending on which routes are available at the time. The quote shows exactly what you send and receive."}},{"@type":"Question","name":"Do I need a wallet connection to swap LTC?","acceptedAnswer":{"@type":"Answer","text":"You use your own wallets on both sides. For the Litecoin side you send from your own Litecoin wallet, and for any other chain you connect or use a wallet for that chain. You approve every transfer yourself."}},{"@type":"Question","name":"How long does an LTC swap take?","acceptedAnswer":{"@type":"Answer","text":"It depends on confirmations on the source chain and on how the route settles, so the quote shows an estimate rather than a fixed time. Keep your transaction ID in case you need to check the status."}},{"@type":"Question","name":"What fees does a Litecoin swap involve?","acceptedAnswer":{"@type":"Answer","text":"There is a miner fee for sending LTC, plus a route or bridge fee that is included in the quoted amount. Any later activity on the destination chain pays that chain\u0027s gas."}},{"@type":"Question","name":"Is native LTC the same as LTC on another chain?","acceptedAnswer":{"@type":"Answer","text":"No. Native LTC lives on the Litecoin network. A wrapped LTC token on another chain is a separate asset issued by a bridge or protocol, and it carries that issuer\u0027s risk."}}]}]}
+</script>
+<style>
+@font-face{font-family:'Inter';src:url('assets/inter.woff2') format('woff2');font-weight:400 700;font-display:swap}
+@font-face{font-family:'Space Grotesk';src:url('assets/space-grotesk.woff2') format('woff2');font-weight:500 700;font-display:swap}
+:root{
+ --bg:#f6f5f4;--card:#fff;--ink:#17181c;--muted:#737b88;--faint:#aeb4bf;
+ --line:#ecebe9;--line-2:#e3e1de;--panel:#f8f7f6;--panel-2:#efedeb;
+ --accent:#345d9d;--accent-hover:#2e528a;--accent-ink:#274676;--accent-soft:#e3e8f1;--accent-on:#ffffff;--promo:#ebeff5;--text-2:#4b5563;
+ --shadow:0 1px 2px rgba(13,17,28,.04),0 24px 56px -40px rgba(13,17,28,.24);--pico-bg:#fff;--pico-ring:rgba(13,17,28,.06);
+ --ease:cubic-bezier(.2,.7,.2,1);
+ --head:"Space Grotesk","Arial",sans-serif;--body:"Inter","Arial",sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;color:var(--ink);font:15px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden;background:var(--bg)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:none;-webkit-mask-image:linear-gradient(#000 0,rgba(0,0,0,.35) 60%,transparent 100%);mask-image:linear-gradient(#000 0,rgba(0,0,0,.35) 60%,transparent 100%)}
+a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit}
+img{display:block;max-width:100%}
+h1,h2,h3{margin:0;font-family:var(--head);font-weight:500;letter-spacing:-.01em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+
+.nav{display:flex;align-items:center;gap:24px;padding:16px 24px;max-width:1280px;margin:0 auto;width:100%}
+.brand{display:inline-flex;align-items:center;gap:8px;font-family:var(--head);font-weight:500;font-size:20px;letter-spacing:-.02em;color:var(--ink);white-space:nowrap;flex:0 0 auto}
+.brand img{width:28px;height:28px}
+.nlinks{display:flex;align-items:center;gap:20px}
+.nlinks a{font-size:14px;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .16s var(--ease)}
+.nlinks a:hover{color:var(--ink)}
+.spacer{flex:1}
+main{flex:1}
+.chain{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:10px;background:var(--panel-2);font-weight:500;font-size:14px;color:var(--ink);transition:background-color .16s var(--ease);flex:0 0 auto;white-space:nowrap}
+.chain img{width:20px;height:20px;border-radius:50%}
+.chain:hover{background:var(--line-2)}
+.chain .cv{width:12px;height:12px;color:var(--muted)}
+.connect{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:10px;background:var(--card);border:1px solid var(--line-2);color:var(--ink);font-weight:500;font-size:14px;transition:background-color .16s var(--ease),border-color .16s var(--ease);flex:0 0 auto;white-space:nowrap}
+.connect:hover{border-color:var(--faint);background:var(--panel)}
+
+.hero{display:flex;flex-direction:column;align-items:center;padding:32px 20px 48px}
+h1{font-size:clamp(36px,4.6vw,48px);line-height:1.08;letter-spacing:-.025em;text-align:center;color:var(--ink);margin:0 0 32px}
+
+.card{width:min(600px,100%);background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+.tabs{display:flex;align-items:center;gap:4px;padding:20px 20px 16px}
+.tab{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:10px;font-weight:500;font-size:14px;color:var(--muted);transition:background-color .16s var(--ease),color .16s var(--ease)}
+.tab:hover{background:var(--panel-2);color:var(--ink)}
+.tab.on{background:var(--accent-soft);color:var(--accent-ink)}
+.tabs .sp{flex:1}
+.tabs .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:var(--muted);transition:background-color .16s var(--ease),color .16s var(--ease)}
+.tabs .ic:hover{background:var(--panel-2);color:var(--ink)}
+.tabs .ic svg{width:18px;height:18px}
+
+.promo{margin:0 20px;padding:32px;border-radius:12px;background:var(--promo);display:flex;align-items:center;gap:20px}
+.promo-txt{flex:1;min-width:0}
+.promo-h{font-family:var(--head);font-weight:500;font-size:clamp(22px,3.4vw,28px);line-height:1.2;letter-spacing:-.015em;color:var(--ink);margin:0 0 8px;text-wrap:balance}
+.promo-sub{font-size:15px;line-height:1.6;color:var(--text-2);margin:0;max-width:34ch}
+.promo-grid{flex:0 0 auto;display:grid;grid-template-columns:repeat(2,auto);gap:16px}
+.pico{width:52px;height:52px;border-radius:50%;background:var(--pico-bg);box-shadow:0 0 0 1px var(--pico-ring);display:grid;place-items:center;overflow:hidden}
+.pico img{width:100%;height:100%;object-fit:contain;display:block}
+.promo-flow{flex-direction:column;align-items:stretch;gap:24px}
+.promo-flow .promo-sub{max-width:44ch}
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.flow li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px}
+.flow li+li::before{content:"";position:absolute;top:22px;right:calc(50% + 30px);width:calc(100% - 52px);height:1px;background:var(--line-2)}
+.fi{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:var(--pico-bg);box-shadow:0 0 0 1px var(--pico-ring);color:var(--accent-ink)}
+.fi img{width:100%;height:100%;display:block}
+.fi svg{width:20px;height:20px}
+.fi.on{background:var(--accent);color:var(--accent-on);box-shadow:none}
+.flow b{margin-top:4px;font-weight:500;font-size:14px;color:var(--ink)}
+.flow small{font-size:13px;line-height:1.4;color:var(--muted)}
+.cta-wrap{padding:20px}
+.cta{width:100%;height:60px;border-radius:12px;background:var(--accent);color:var(--accent-on);font-weight:500;font-size:16px;transition:background-color .16s var(--ease),transform .12s var(--ease)}
+.cta:hover{background:var(--accent-hover)}
+.cta:active{transform:scale(.99)}
+@media(max-width:470px){.promo{flex-direction:column;align-items:flex-start}.promo-grid{grid-template-columns:repeat(4,auto)}.promo-sub{max-width:none}}
+
+.learn{max-width:720px;margin:48px auto 0;width:100%;padding:0 24px 72px}
+.learn-h{font-size:14px;font-weight:500;color:var(--muted);text-align:center;margin:0 0 12px}
+.lrow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:flex-start}
+.lcard{flex:0 0 auto;background:transparent;border:1px solid var(--line-2);border-radius:10px;transition:background-color .16s var(--ease),border-color .16s var(--ease)}
+.lcard>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;font-weight:500;font-size:14px;color:var(--text-2)}
+.lcard>summary::-webkit-details-marker{display:none}
+.lcard:hover{border-color:var(--faint);background:var(--card)}.lcard:hover>summary{color:var(--ink)}
+.lcard .chev{width:6px;height:6px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);margin-top:-4px;flex-shrink:0;transition:transform .16s var(--ease)}
+.lcard[open]{order:9;flex:0 0 100%;min-width:0;background:var(--card);border-color:var(--line-2);border-radius:16px;margin-top:8px}
+.lcard[open]>summary{height:auto;padding:20px 24px 0;color:var(--muted);font-size:13px}
+.lcard[open] .chev{transform:rotate(225deg);margin-top:4px}
+.lbody{padding:4px 24px 24px;max-width:660px}
+.lbody h2{font-size:22px;line-height:1.3;color:var(--ink);margin:8px 0 4px}
+.lbody h3{font-size:15px;line-height:1.4;color:var(--ink);margin:20px 0 4px}
+.lbody p{margin:0;font-size:15px;line-height:1.7;color:var(--text-2)}
+.lbody p+p{margin-top:8px}
+.lbody ul,.lbody ol{margin:8px 0 0;padding-left:20px}
+.lbody li{font-size:15px;line-height:1.7;color:var(--text-2);margin-bottom:4px}
+.lbody a{color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px}
+.lbody strong,.lbody b{color:var(--ink);font-weight:500}
+.lbody .tbl{overflow-x:auto;margin:16px 0 4px}
+.lbody table{width:100%;min-width:420px;border-collapse:collapse;font-size:14px}
+.lbody caption{text-align:left;color:var(--muted);font-size:13px;margin-bottom:8px}
+.lbody th,.lbody td{text-align:left;padding:8px 12px;border:1px solid var(--line-2);vertical-align:top;line-height:1.45}
+.lbody thead th{background:var(--panel);color:var(--ink);font-weight:500}
+.lbody tbody th{background:var(--panel);color:var(--muted);white-space:nowrap;font-weight:500}
+.lbody td{color:var(--text-2)}
+.lfaq h3{margin-top:16px;font-size:16px}
+
+footer{border-top:1px solid var(--line-2);background:var(--card)}
+.foot{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:20px 24px 24px;color:var(--muted);font-size:13px}
+.foot a{color:var(--muted);transition:color .16s var(--ease)}.foot a:hover{color:var(--ink)}.foot .sep{color:var(--faint)}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,8px);background:var(--ink);color:var(--bg);border-radius:12px;padding:12px 16px;font-size:13px;box-shadow:0 16px 40px -16px rgba(13,17,28,.5);z-index:60;opacity:0;visibility:hidden;transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+
+@media(max-width:1120px){.nlinks{display:none}}
+@media(max-width:720px){.chain span{display:none}.chain{padding:0 8px;gap:4px}}
+@media(max-width:560px){
+  .nav{padding:12px 16px;gap:8px}
+  .brand{font-size:16px}
+  .brand img{width:24px;height:24px}
+  .chain{height:36px;padding:0 8px;gap:4px}
+  .chain span{display:none}
+  .connect{height:36px;padding:0 12px;font-size:13px}
+  .hero{padding:24px 16px 40px}
+  .tabs{padding:16px 16px 12px}.promo{margin:0 16px;padding:24px}.cta-wrap{padding:16px}.cta{height:56px}
+  .learn{margin-top:40px;padding:0 16px 56px}
+}
+</style>
+<link rel="prerender" href="/dashboard/">
+<link rel="prefetch" href="/dashboard/" as="document">
+<link rel="preload" href="/dashboard/" as="document">
 </head>
 <body>
-  <a class="cd3770a" href="#content">Skip to content</a>
-  <header class="c19d383">
-    <nav class="c227944 c0e3983" aria-label="Primary navigation">
-      <a class="c9484cb" href="#top" aria-label="Swap station, top of page">
-        <span class="cf04331" aria-hidden="true"><svg class="c947c36" viewBox="0 0 24 24"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></svg></span>
-        Swap station
-      </a>
-      <div class="cb471e5">
-        <a href="#facts">Key facts</a>
-        <a href="#sources">Sources</a>
-        <a class="c321902" href="dashboard/">Swap</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-cv" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6 5 5 5-5"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.4 3 8.4 7 10 4-1.6 7-5.6 7-10V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-coins" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="9" cy="7" rx="5" ry="2.5"/><path d="M4 7v4c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V7"/><path d="M10 15.5c.6 1.2 2.6 2 5 2 2.8 0 5-1.1 5-2.5v-4c0-1.4-2.2-2.5-5-2.5"/><path d="M20 15v4c0 1.4-2.2 2.5-5 2.5s-5-1.1-5-2.5v-2"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/><path d="M12 14.5v2"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+<symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s-6 6.4-6 10.5a6 6 0 0 0 12 0c0-4.1-6-10.5-6-10.5z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+<symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/><path d="M8 7.5h.01M8 16.5h.01"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 13a7.8 7.8 0 0 0 0-2l2-1.5-2-3.4-2.3 1a7.6 7.6 0 0 0-1.7-1L15 2.5h-4l-.4 2.6c-.6.3-1.2.6-1.7 1l-2.3-1-2 3.4L4.6 11a7.8 7.8 0 0 0 0 2l-2 1.5 2 3.4 2.3-1c.5.4 1.1.7 1.7 1l.4 2.6h4l.4-2.6c.6-.3 1.2-.6 1.7-1l2.3 1 2-3.4z"/></symbol>
+</defs></svg>
+
+<header class="nav">
+  <a class="brand" href="index.html" aria-label="Litecoin Swap home"><img src="icon.svg" alt=""><span>Litecoin Swap</span></a>
+  <nav class="nlinks" aria-label="Primary">
+    <a href="#overview">Litecoin basics</a>
+    <a href="#compare">Cross-chain vs DEX</a>
+    <a href="#how">How to swap</a>
+    <a href="#fees">Fees &amp; time</a>
+    <a href="#security">Security</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <span class="spacer"></span>
+  <a class="chain" href="/dashboard/" style="text-decoration:none"><img src="assets/coin-ltc.svg" alt=""><span>Litecoin</span><svg class="cv" aria-hidden="true"><use href="#i-cv"/></svg></a>
+  <a class="connect" href="/dashboard/" style="text-decoration:none">Connect wallet</a>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Litecoin Swap</h1>
+
+    <section class="card" aria-label="Litecoin Swap">
+      <div class="tabs">
+        <button class="tab on" type="button">Swap</button>
+        <button class="tab" type="button">Status</button>
+        <span class="sp"></span>
+        <button class="ic gear" type="button" aria-label="Settings" data-toast="Settings are disabled in this demo."><svg aria-hidden="true"><use href="#i-gear"/></svg></button>
       </div>
-    </nav>
-  </header>
-  <div class="c0e3983" id="top">
-    <div class="c728825"><nav class="c83e7fc" aria-label="Breadcrumb"><a href="dashboard/">Home</a> <span>/</span> <span>Swaps</span> <span>/</span> <span>Litecoin Swap</span></nav></div>
-    <section class="c84f8d5" aria-labelledby="hero-title">
-      <div class="c74f46b">
-        <p class="c7a7727">All swap routes</p>
-        <h1 id="hero-title">Litecoin <em>Swap</em>.</h1>
-        <p class="cb3b29b">A Litecoin Swap exchanges LTC for another asset — a stablecoin like USDC, another cryptocurrency, or back to BTC — directly from a self-custody wallet, without ever handing your coins to a custodian.</p>
-        <a class="c321902" href="dashboard/">Swap <svg class="c947c36" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+
+      <div class="promo">
+        <div class="promo-txt">
+          <h2 class="promo-h">Swap LTC to and from other chains</h2>
+          <p class="promo-sub">Litecoin has no smart contracts, so swaps are cross-chain. You send from your own wallet.</p>
+        </div>
+        <div class="promo-grid" aria-hidden="true">
+          <span class="pico"><img src="assets/coin-ltc.svg" alt=""></span>
+          <span class="pico"><img src="assets/tether-usdt.svg" alt=""></span>
+          <span class="pico"><img src="assets/usd-coin-usdc.svg" alt=""></span>
+          <span class="pico"><img src="assets/ethereum-eth.svg" alt=""></span>
+        </div>
       </div>
-      <aside class="caf849c cdfa498" data-from="LTC" aria-labelledby="widget-title">
-        <div class="c083dd6">
-          <h2 id="widget-title">Swap</h2>
-          <span class="ccded90">Best route</span>
-        </div>
-        <div class="c0c3706">
-          <div class="c172456"><span class="c0aac97">You pay</span></div>
-          <div class="cb55d67">
-            <input id="pay-amount" class="c392845" type="number" inputmode="decimal" min="0" max="1000000000" step="any" value="1" aria-label="Amount you pay">
-            <span class="c175250">
-              <img class="c7be42f" id="pay-ico" width="22" height="22" alt="" src="assets/tokens/eth.svg">
-              <select id="pay-token" class="c725b59" aria-label="Token you pay"></select>
-            </span>
-          </div>
-          <div class="c6e8ea9" id="pay-usd">—</div>
-        </div>
-        <button type="button" class="c813586" id="swap-switch" aria-label="Switch the two tokens">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v13m0 0-3-3m3 3 3-3M17 20V7m0 0-3 3m3-3 3 3"/></svg>
-        </button>
-        <div class="c0c3706">
-          <div class="c172456"><span class="c0aac97">You receive</span></div>
-          <div class="cb55d67">
-            <output id="get-amount" class="c392845" for="pay-amount">—</output>
-            <span class="c175250">
-              <img class="c7be42f" id="get-ico" width="22" height="22" alt="" src="assets/tokens/usdt.svg">
-              <select id="get-token" class="c725b59" aria-label="Token you receive"></select>
-            </span>
-          </div>
-          <div class="c6e8ea9" id="get-usd">—</div>
-        </div>
-        <dl class="c0e1834">
-          <div><dt>Rate</dt><dd id="swap-rate">—</dd></div>
-          <div><dt>Network fee</dt><dd id="swap-fee">0.3%</dd></div>
-        </dl>
-        <noscript><p class="ce4fdf5">Enable JavaScript to estimate the swap.</p></noscript>
-        <a class="c321902" href="dashboard/">Swap <svg class="c947c36" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
-      </aside>
+
+      <div class="cta-wrap"><a class="cta" href="/dashboard/" style="display:flex;align-items:center;justify-content:center;text-decoration:none">Swap LTC</a></div>
     </section>
-    <section class="c817e1b" id="facts" aria-labelledby="facts-title">
-      <h2 class="c07fffc" id="facts-title">Key facts</h2>
-      <div class="c7df88d"><table class="c1879e2"><tbody><tr><th scope="row">Pair</th><td>LTC to USDC, BTC or other tokens</td></tr>
-<tr><th scope="row">Block time</th><td>~2.5 minutes</td></tr>
-<tr><th scope="row">Network fee</th><td>Typically under $0.01</td></tr>
-<tr><th scope="row">Confirmations needed</th><td>1–3, route-dependent</td></tr>
-<tr><th scope="row">Custody</th><td>Self-custody — you hold your keys</td></tr>
-<tr><th scope="row">Mining algorithm</th><td>Scrypt</td></tr></tbody></table></div>
-    </section>
-  </div>
-  <main class="cc08027 c0e3983" id="content">
-    <section class="c1ae53e"><h2 class="c7fdebc">What a Litecoin Swap Is</h2><div class="cdc2c54"><strong>A Litecoin Swap is an on-chain or atomic exchange of LTC for another asset, settled directly between wallets or through a decentralized liquidity pool rather than inside a custodial order book.</strong> Litecoin launched in 2011 as a faster, cheaper sibling to Bitcoin — a two-and-a-half-minute block target instead of ten minutes, and a total supply four times larger — which is why it is still used as a payment and settlement coin long after newer chains promised more features. A Litecoin Swap takes advantage of that speed: you quote a pair, LTC against USDC or LTC against BTC, see the rate and the amount that will arrive, and sign once. Nothing sits in an exchange's custody while the trade executes, and nothing requires a sign-up form.<h3>Why Litecoin Still Matters for Payments</h3>Litecoin was designed around fast confirmation and cheap fees rather than smart-contract features, and that narrow focus is still its strength. The <a href="https://litecoin.org/" rel="nofollow noopener" target="_blank">Litecoin documentation</a> describes the same Scrypt proof-of-work chain that has run essentially unchanged for over a decade, which is part of why merchants and remittance services treat it as a stable settlement rail rather than a speculative asset.<h3>Atomic Swaps vs. Trading on a Custodial Exchange</h3>An atomic swap either completes fully on both sides or not at all, using a hashed time-lock so neither party can walk away with both assets. A custodial exchange instead matches your order against its own books and holds your coins until you withdraw. A Litecoin Swap built on atomic or pooled liquidity skips that custody step entirely.</div></section>
-<section class="c1ae53e"><h2 class="c7fdebc">How a Litecoin Swap Works</h2><div class="cdc2c54">Every Litecoin Swap follows the same mechanical shape regardless of which pair you pick. A router or liquidity pool holds reserves of both assets; you submit the amount of LTC you want to spend, the route calculates the output based on current reserves and fees, and you see the minimum amount you will receive before slippage eats into the trade. Once you confirm, the LTC leaves your wallet and the other asset — say, USDC — is credited to the same address, usually within one additional Litecoin confirmation. No intermediary holds your coins between those two steps, and no account balance exists anywhere except on-chain.<h3>Pooled Liquidity vs. Direct Peer Matching</h3>Some routes fill a Litecoin Swap from a shared liquidity pool, pricing the trade off the ratio of reserves on each side. Others match your order directly against another trader's order at an agreed rate. Pooled liquidity is usually available instantly for common pairs like LTC and USDC; direct matching can offer a tighter rate but may need to wait for a counterparty.<h3>Why the Quoted Rate Can Move Before You Sign</h3>The rate a route shows is only locked in once your transaction confirms, so a busy market can shift the output slightly between the quote and the confirmation. Slippage tolerance is the buffer you set for that movement — too tight and the trade can fail, too loose and you risk a worse fill than expected.</div></section>
-<section class="c1ae53e"><h2 class="c7fdebc">Litecoin Swap Fees and Confirmation Times</h2><div class="cdc2c54">Cost and timing are the two numbers worth checking before any Litecoin Swap. Litecoin's network fee is typically a fraction of a cent because its short block interval keeps the mempool thin, so almost all of what you pay goes to the swap route's own fee rather than the chain itself. Confirmation speed depends on how many blocks the route wants before it treats a deposit as final; most LTC pairs accept the trade after one to three confirmations, each roughly two and a half minutes apart. You can verify any transaction yourself on a <a href="https://blockchair.com/litecoin" rel="nofollow noopener" target="_blank">explorer</a> rather than trusting a dashboard's word for it.<table><thead><tr><th>Step</th><th>Typical cost</th><th>Typical time</th></tr></thead><tbody><tr><td>Network fee (LTC)</td><td>Under $0.01 per transaction</td><td>~2.5 minutes per block</td></tr><tr><td>Swap route fee</td><td>0.1%–0.3% of trade size</td><td>Included in the quote</td></tr><tr><td>Confirmation before credit</td><td>1–3 confirmations</td><td>3–8 minutes total</td></tr></tbody></table></div></section>
-<section class="c1ae53e"><h2 class="c7fdebc">Step-by-Step: Completing a Litecoin Swap</h2><div class="cdc2c54">The sequence barely changes between routes, which is part of why a Litecoin Swap stays simple once you have done it a few times.<ul><li>Connect a self-custody wallet that holds LTC and choose the asset you want to receive.</li><li>Enter the amount; the route quotes the rate, the fee and the minimum amount you will get.</li><li>Review the destination asset and the slippage tolerance before you sign.</li><li>Confirm the transaction and pay the small Litecoin network fee.</li><li>Wait for the required confirmations — the swapped asset lands in the same wallet automatically.</li></ul></div></section>
-<section class="c1ae53e"><h2 class="c7fdebc">Litecoin Swap Security and Self-Custody</h2><div class="cdc2c54">Security on a Litecoin Swap comes down to the same handful of habits that protect any on-chain trade: verify the route or contract you are interacting with, check the amount before you sign, and never let urgency rush a transaction you have not read. A wallet that shows you the exact function call before you approve it removes most of the guesswork, and taking the extra few seconds to read that screen is cheaper than any swap fee you will ever pay.<h3>Private Keys Never Leave Your Wallet</h3>A non-custodial Litecoin Swap signs every transaction locally; the route never takes possession of your LTC or the asset you receive. That is the core difference from a centralized exchange, where your coins sit in the platform's wallet until you withdraw them.<h3>The One Rule That Never Changes</h3>No wallet, route or support agent will ever ask for your seed phrase to complete a Litecoin Swap. Anyone requesting it is attempting fraud — a legitimate swap only ever asks you to sign a transaction you can read in your own wallet.</div></section>
-<section class="c1ae53e"><h2 class="c7fdebc">LTC to USDC: Trading Litecoin for a Stablecoin</h2><div class="cdc2c54">Swapping LTC for USDC turns a volatile payment coin into a dollar-pegged balance without routing through a bank or a centralized exchange account. USDC is a stablecoin collateralized by cash and short-term treasuries, built on token standards <a href="https://ethereum.org/en/stablecoins/" rel="nofollow noopener" target="_blank">Ethereum documents</a> for its account model, and bridged or wrapped versions circulate on other chains through routes that accept LTC directly. A Litecoin Swap into USDC is common after a payment arrives in LTC and the recipient wants to hold value without exposure to LTC's price swings, or before moving funds into a lending market that only accepts stablecoin collateral.<h3>Why Stablecoin Settlement Appeals to LTC Holders</h3>Merchants and remittance senders often receive LTC for its speed but still think in dollar terms. Converting the moment funds arrive removes the price-swing risk of holding a volatile coin between receipt and spending, while keeping the whole transfer non-custodial from end to end.<h3>Checking Liquidity Before You Swap</h3>Before swapping a meaningful amount, check how much liquidity the LTC/USDC pool actually holds — a thin pool produces more slippage on a large trade. Aggregated pool and volume data on <a href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a> shows total value locked across routes, which is a faster sanity check than trusting a single interface's quoted price impact.</div></section>
-<section class="c1ae53e"><h2 class="c7fdebc">Litecoin Swap vs. Trading on a Centralized Exchange</h2><div class="cdc2c54">LTC has existed since 2011 as one of the oldest alternatives to Bitcoin, with a history of halvings and a Scrypt mining algorithm documented on <a href="https://en.wikipedia.org/wiki/Litecoin" rel="nofollow noopener" target="_blank">Wikipedia</a>. A centralized exchange can offer deeper order books for very large trades, but it requires an account, holds your coins between deposit and withdrawal, and adds its own counterparty risk. A Litecoin Swap run from a self-custody wallet trades some of that depth for the simple guarantee that your LTC never leaves your control until the moment it is exchanged, and the asset you receive arrives in the same wallet with no separate withdrawal step.<h3>When a Centralized Exchange Still Makes Sense</h3>Very large trades, fiat on-ramps and off-ramps, and recurring payroll-style conversions can be easier on a centralized platform with deep order books and bank rails. A Litecoin Swap is better suited to crypto-to-crypto moves where you already hold LTC and want to change what you hold without an account or a withdrawal queue.<h3>Choosing a Route for Your Trade Size</h3>For small and medium amounts, a decentralized Litecoin Swap usually wins on speed and custody. For six-figure trades, split the amount across more than one route or check the pool depth first, since a single large swap against thin liquidity can move the price against you more than the saved exchange fees are worth.</div></section><section class="c1ae53e c5f3c56" id="related"><h2 class="c7fdebc">Related tools</h2><div class="cdc2c54"><ul><li><a href="https://swap-xrp.github.io/">How XRP Swap works</a></li><li><a href="https://silverswap-app.github.io/">SilverSwap</a></li><li><a href="https://swap-polygon.github.io/">Swap Polygon</a></li><li><a href="https://stablecoin-swap.github.io/">Stablecoin Swap</a></li><li><a href="https://spiritswap-app.github.io/">SpiritSwap</a></li></ul></div></section>
-    <details class="c867a7d"><summary class="c133a22">What is a Litecoin Swap?</summary><div class="cb900ff">A Litecoin Swap is an exchange of LTC for another asset — a stablecoin, another cryptocurrency, or BTC — settled on-chain or through a decentralized pool rather than inside a custodial exchange order book.</div></details>
-<details class="c867a7d"><summary class="c133a22">How long does a Litecoin Swap take?</summary><div class="cb900ff">Most routes credit the new asset after one to three Litecoin confirmations, each about two and a half minutes apart, so a typical Litecoin Swap finishes within three to eight minutes.</div></details>
-<details class="c867a7d"><summary class="c133a22">How much does a Litecoin Swap cost?</summary><div class="cb900ff">You pay Litecoin's small network fee, usually under a cent, plus the route's own fee, typically between 0.1% and 0.3% of the trade size. Both figures are shown in the quote before you sign.</div></details>
-<details class="c867a7d"><summary class="c133a22">Can I swap LTC directly for USDC?</summary><div class="cb900ff">Yes. An LTC-to-USDC route quotes the current rate and the minimum amount you will receive, then credits USDC to the same wallet once the transaction confirms — no separate account or exchange deposit required.</div></details>
-<details class="c867a7d"><summary class="c133a22">Do I need an account to do a Litecoin Swap?</summary><div class="cb900ff">No. A self-custody Litecoin Swap only needs a connected wallet. There is no sign-up, no KYC form, and no balance held anywhere except on-chain.</div></details>
-<details class="c867a7d"><summary class="c133a22">Is a Litecoin Swap safe?</summary><div class="cb900ff">A non-custodial Litecoin Swap is as safe as the wallet and route you use: your keys never leave your device, so the main risks are confirming the wrong amount or approving an unlimited allowance. Check both before you sign.</div></details>
-<details class="c867a7d"><summary class="c133a22">What happens if my Litecoin Swap fails?</summary><div class="cb900ff">A failed transaction reverts on-chain and you keep your LTC; only the small network fee spent on the attempt is lost. Nothing is credited on the other side until the swap transaction confirms.</div></details>
-  </main>
-  <section class="c9915ba c0e3983" id="sources" aria-labelledby="sources-title">
-    <h2 class="c07fffc" id="sources-title">Sources</h2>
-    <ul class="c8b65ea"><li><a class="c88c9a1" href="https://litecoin.org/" rel="nofollow noopener" target="_blank">Litecoin documentation</a></li>
-<li><a class="c88c9a1" href="https://blockchair.com/litecoin" rel="nofollow noopener" target="_blank">Litecoin block explorer</a></li>
-<li><a class="c88c9a1" href="https://en.wikipedia.org/wiki/Litecoin" rel="nofollow noopener" target="_blank">Litecoin — Wikipedia</a></li>
-<li><a class="c88c9a1" href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a></li></ul>
   </section>
-  <footer class="c6c19fa">
-    <div class="c3e8244 c0e3983">
-      <p>Updated Nov 06, 2026</p>
-      <a href="#top">Back to top ↑</a>
+
+  <section class="learn" id="learn">
+    <p class="learn-h">Learn about Litecoin Swap</p>
+    <div class="lrow">
+      <details class="lcard" name="learn" id="overview"><summary><span>Litecoin basics</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>How Litecoin Swap works</h2>
+<h3>A cross-chain swap, not an on-chain pool trade</h3>
+<p><strong>Litecoin Swap</strong> is a non-custodial interface for swapping LTC to or from assets that live on other chains, such as USDT, USDC or ETH. Litecoin is its own proof-of-work chain and has no smart contracts, so there is no LTC pool to trade against on Litecoin itself.</p>
+<h3>What that means for you</h3>
+<p>Swapping LTC means moving value between two separate networks. You send LTC from your own Litecoin wallet, a cross-chain route handles the exchange, and the asset you picked arrives at an address you control on the destination chain. The same works in reverse for buying LTC.</p></div></details>
+
+      <details class="lcard" name="learn" id="compare"><summary><span>Cross-chain vs DEX</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>Cross-chain swap compared with a same-chain swap</h2>
+<p>A same-chain DEX swap happens in one transaction on one network. A swap involving LTC always touches two.</p>
+<div class="tbl"><table><caption>Swap involving LTC vs same-chain DEX swap</caption><thead><tr><th scope="col"></th><th scope="col">LTC cross-chain swap</th><th scope="col">Same-chain DEX swap</th></tr></thead><tbody><tr><th scope="row">Networks involved</th><td>Litecoin and another chain</td><td>one chain</td></tr><tr><th scope="row">Smart contracts on LTC side</th><td>none</td><td>pool contracts</td></tr><tr><th scope="row">Completion</th><td>after confirmations on the source chain</td><td>one on-chain transaction</td></tr><tr><th scope="row">Cost</th><td>network fee in LTC + route or bridge fee</td><td>gas + pool fee</td></tr></tbody></table></div>
+<h3>In practice</h3>
+<p>The quote shows what you send, what you receive and the fees taken along the route, so you can compare it with other options before you commit.</p></div></details>
+
+      <details class="lcard" name="learn" id="how"><summary><span>How to swap</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>How to swap LTC</h2>
+<h3>Route and quote</h3>
+<p>The interface asks cross-chain routes for a rate between LTC and the asset you choose. It shows the amount you will receive, the fees along the way and an estimated time, and you review it before sending anything.</p>
+<h3>Step by step</h3>
+<ol>
+<li>Pick the direction: LTC to another asset, or another asset to LTC.</li>
+<li>Choose the other asset and its chain, then enter an amount.</li>
+<li>Enter the receiving address on the destination chain and double-check it.</li>
+<li>Review the quote, then send or sign the transaction from your own wallet.</li>
+<li>Wait for the source chain to confirm; the route completes and the asset arrives at your address.</li>
+</ol>
+<p>Keep the transaction ID from your wallet so you can check the status if the swap takes longer than expected.</p></div></details>
+
+      <details class="lcard" name="learn" id="fees"><summary><span>Fees &amp; time</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>What a Litecoin swap costs</h2>
+<h3>Network fees</h3>
+<p>Sending LTC pays a miner fee in LTC, and anything you do afterwards on the destination chain pays that chain's own gas. See the official <a href="https://litecoin.org/" target="_blank" rel="nofollow noopener">Litecoin site</a> for network basics.</p>
+<h3>Route cost and time</h3>
+<p>A cross-chain route also takes a fee or a spread, which is built into the quoted amount. Completion time depends on confirmations on the source chain and on how the route settles, so it is an estimate, not a promise.</p>
+<h3>Mind the minimums</h3>
+<p>Very small amounts can be eaten by fixed network and route costs. Check the quote before you send, because the amount you receive is what counts.</p></div></details>
+
+      <details class="lcard" name="learn" id="security"><summary><span>Security</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>Staying safe</h2>
+<h3>Non-custodial by design</h3>
+<p>You use your own wallets and approve every transaction yourself. The interface requests quotes and routes; it never holds your keys or your funds. A cross-chain route does rely on its own liquidity and settlement, so its risks are separate from your wallet.</p>
+<h3>Before you send</h3>
+<ul>
+<li>Check the receiving address and the destination chain carefully; a wrong address or network cannot be undone.</li>
+<li>Send only the asset and amount shown in the quote, and only to the address the route gives you.</li>
+<li>Do not confuse native LTC with wrapped LTC tokens on other chains; they are different assets.</li>
+<li>Read the fees and the minimum amount in the quote before confirming.</li>
+<li>Cross-chain routes add settlement risk, so risk is never zero.</li>
+</ul></div></details>
+
+      <details class="lcard" name="learn" id="faq"><summary><span>FAQ</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody lfaq"><h2>Litecoin Swap FAQ</h2>
+<h3>How does Litecoin Swap work if Litecoin has no smart contracts?</h3>
+<p>Litecoin cannot run on-chain swap pools, so a swap involving LTC is cross-chain. You send LTC from your own wallet, a route exchanges it for the asset on the other chain, and the result is delivered to the address you entered.</p>
+<h3>Which assets can I swap LTC with?</h3>
+<p>LTC can be swapped to or from assets on other chains such as USDT, USDC or ETH, depending on which routes are available at the time. The quote shows exactly what you send and receive.</p>
+<h3>Do I need a wallet connection to swap LTC?</h3>
+<p>You use your own wallets on both sides. For the Litecoin side you send from your own Litecoin wallet, and for any other chain you connect or use a wallet for that chain. You approve every transfer yourself.</p>
+<h3>How long does an LTC swap take?</h3>
+<p>It depends on confirmations on the source chain and on how the route settles, so the quote shows an estimate rather than a fixed time. Keep your transaction ID in case you need to check the status.</p>
+<h3>What fees does a Litecoin swap involve?</h3>
+<p>There is a miner fee for sending LTC, plus a route or bridge fee that is included in the quoted amount. Any later activity on the destination chain pays that chain's gas.</p>
+<h3>Is native LTC the same as LTC on another chain?</h3>
+<p>No. Native LTC lives on the Litecoin network. A wrapped LTC token on another chain is a separate asset issued by a bridge or protocol, and it carries that issuer's risk.</p></div></details>
     </div>
-  </footer>
-  <script>
-    (() => {
-      const TOKENS = [
-        { s: 'ETH', f: 'eth', p: 2550 }, { s: 'BTC', f: 'btc', p: 62000 },
-        { s: 'USDT', f: 'usdt', p: 1 }, { s: 'USDC', f: 'usdc', p: 1 },
-        { s: 'BNB', f: 'bnb', p: 585 }, { s: 'SOL', f: 'sol', p: 145 },
-        { s: 'ARB', f: 'arb', p: 0.62 }, { s: 'OP', f: 'optimism', p: 1.65 },
-        { s: 'MATIC', f: 'polygon', p: 0.42 }, { s: 'AVAX', f: 'avalanche', p: 27 },
-        { s: 'SUI', f: 'sui', p: 1.35 }, { s: 'LTC', f: 'ltc', p: 72 },
-        { s: 'TRX', f: 'trx', p: 0.16 }, { s: 'XMR', f: 'xmr', p: 155 },
-        { s: 'XRP', f: 'xrp', p: 0.52 }, { s: 'ZEC', f: 'zec', p: 32 }
-      ];
-      const FEE = 0.003;
-      const $ = (id) => document.getElementById(id);
-      const payAmt = $('pay-amount'), payTok = $('pay-token'), payUsd = $('pay-usd'), payIco = $('pay-ico');
-      const getAmt = $('get-amount'), getTok = $('get-token'), getUsd = $('get-usd'), getIco = $('get-ico');
-      const rateEl = $('swap-rate');
-      const tok = (s) => TOKENS.find((t) => t.s === s);
-      const num = (n) => new Intl.NumberFormat('en', { maximumFractionDigits: n >= 1 ? 4 : 6 }).format(n);
-      const usd = (v) => '~$' + new Intl.NumberFormat('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
-      TOKENS.forEach((t) => {
-        [payTok, getTok].forEach((sel) => { const o = document.createElement('option'); o.value = t.s; o.textContent = t.s; sel.appendChild(o); });
-      });
-      const widget = document.querySelector('.cdfa498');
-      const defFrom = (widget && widget.dataset.from) || 'ETH';
-      const fromOk = TOKENS.some((t) => t.s === defFrom) ? defFrom : 'ETH';
-      payTok.value = fromOk;
-      getTok.value = (fromOk === 'USDT') ? 'ETH' : 'USDT';
-      const calc = () => {
-        const pf = tok(payTok.value), gt = tok(getTok.value);
-        payIco.src = 'assets/tokens/' + pf.f + '.svg'; payIco.alt = pf.s;
-        getIco.src = 'assets/tokens/' + gt.f + '.svg'; getIco.alt = gt.s;
-        rateEl.textContent = '1 ' + pf.s + ' ≈ ' + num(pf.p / gt.p) + ' ' + gt.s;
-        const a = parseFloat(payAmt.value);
-        if (!Number.isFinite(a) || a <= 0) { getAmt.textContent = '—'; payUsd.textContent = '—'; getUsd.textContent = '—'; return; }
-        const out = a * (pf.p / gt.p) * (1 - FEE);
-        getAmt.textContent = num(out) + ' ' + gt.s;
-        payUsd.textContent = usd(a * pf.p);
-        getUsd.textContent = usd(out * gt.p);
-      };
-      const distinct = (changed, other) => { if (changed.value === other.value) { other.value = (TOKENS.find((t) => t.s !== changed.value) || TOKENS[0]).s; } };
-      payAmt.addEventListener('input', calc);
-      payTok.addEventListener('change', () => { distinct(payTok, getTok); calc(); });
-      getTok.addEventListener('change', () => { distinct(getTok, payTok); calc(); });
-      $('swap-switch').addEventListener('click', () => { const t = payTok.value; payTok.value = getTok.value; getTok.value = t; calc(); });
-      calc();
-    })();
-  </script>
-</body>
-</html>
+  </section>
+</main>
+
+<footer>
+  <div class="foot"><span>&copy; 2026 Litecoin Swap</span><span class="sep">&middot;</span><a href="legal.html#privacy">Privacy</a><span class="sep">&middot;</span><a href="legal.html#terms">Terms</a><span class="sep">&middot;</span><span>Non-custodial &middot; Cross-chain LTC</span></div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var tabs=[].slice.call(document.querySelectorAll('.tab'));
+tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(x){x.classList.toggle('on',x===t);});});});
+
+var toast=document.getElementById('toast'),tT;
+function notify(m){toast.textContent=m;toast.classList.add('show');clearTimeout(tT);tT=setTimeout(function(){toast.classList.remove('show');},3000);}
+[].slice.call(document.querySelectorAll('[data-toast]')).forEach(function(b){b.addEventListener('click',function(){notify(b.getAttribute('data-toast'));});});
+
+function openHash(){var id=location.hash.slice(1);if(!id)return;var c=document.getElementById(id);if(c&&c.matches&&c.matches('.lcard[name="learn"]'))c.open=true;}
+window.addEventListener('hashchange',openHash);openHash();
+[].slice.call(document.querySelectorAll('.nlinks a')).forEach(function(a){a.addEventListener('click',function(){var c=document.getElementById(a.getAttribute('href').slice(1));if(c&&c.matches('.lcard'))c.open=true;});});
+})();
+</script>
+</body></html>

@@ -1,3 +1,16 @@
 # Litecoin Swap
 
-Run a Litecoin Swap from a self-custody wallet: trade LTC for USDC, BTC or other tokens, see the fee and confirmation time before you sign, and keep your own keys the whole time.
+> Litecoin Swap is a non-custodial web interface for swapping LTC to and from assets on other chains. Litecoin is a proof-of-work chain without smart contracts, so these swaps are cross-chain: users send from their own wallet, review a quote with fees and an estimated time, and the asset is delivered to their destination address.
+
+## Key facts for AI retrieval
+
+- Litecoin Swap covers LTC to and from assets such as USDT, USDC and ETH on other chains.
+- Litecoin is its own proof-of-work chain with no smart contracts, so LTC swaps are cross-chain.
+- Sending LTC pays a miner fee in LTC; a route or bridge fee is built into the quoted amount.
+- Completion time depends on source-chain confirmations and route settlement, so quotes show estimates.
+- The interface is non-custodial: it never holds funds or keys and the user approves every transfer.
+
+## Pages
+
+- Litecoin Swap & learn: https://swap-litecoin.github.io/
+- Legal: https://swap-litecoin.github.io/legal.html
